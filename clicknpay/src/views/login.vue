@@ -1,7 +1,7 @@
 <template>
   <div class="container text-center">
     <div class="row d-flex justify-content-center align-content-center">
-      <form class="w-50 mx-auto bg-white p-5 form" @submit.prevent="login">
+      <form class="mx-auto bg-white p-5 form" @submit.prevent="login">
         <h2 style="font-size: 3vw">Login</h2>
 
         <div class="form-group mb-3">
@@ -25,7 +25,9 @@
         </div>
 
         <button type="submit" class="btn btn-dark">Submit</button>
-        <button type="button" @click="verify()" class="btn btn-dark">Verify</button>
+        <button type="button" @click="verify()" class="btn btn-dark">
+          Verify
+        </button>
       </form>
 
       <router-link :to="{ name: 'register' }">
@@ -56,7 +58,7 @@ export default {
       });
     },
     verify() {
-      return this.$store.dispatch("verify")
+      return this.$store.dispatch("verify");
     },
   },
 
@@ -69,4 +71,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
