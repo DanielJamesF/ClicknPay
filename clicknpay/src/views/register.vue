@@ -1,7 +1,7 @@
 <template>
   <div class="container text-center">
     <div class="row h-75 d-flex justify-content-center align-content-center">
-      <form
+      <form id="register"
         class="w-50 mx-auto p-5 text-black rounded-5"
         @submit.prevent="register"
       >

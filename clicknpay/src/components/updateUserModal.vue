@@ -1,9 +1,9 @@
 <template>
-  <div :id="'update'+product.id" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div :id="'update'+user.id" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Update Product</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Update User {{user.id}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -12,37 +12,37 @@
             <!-- name -->
             <div class="mb-3">
               <label for="updateName" class="form-label">Name:</label>
-              <input class="form-control" type="text" v-model="product.prodname"
+              <input class="form-control" type="text" v-model="user.firstname"
                 placeholder="Enter Name:" required />
             </div>
 
             <!-- Image URL -->
             <div class="mb-3">
               <label for="updateimg" class="form-label">Image URL</label>
-              <input class="form-control" type="text" name="updateimg" id="updateimg" v-model="product.prodimg"
+              <input class="form-control" type="text" name="updateimg" id="updateimg" v-model="user.lastname"
                 placeholder="episode count" />
             </div>
 
             <!-- Price -->
             <div class="mb-3">
-              <label for="updatePrice" class="form-label">Product Price</label>
-              <input class="form-control" type="number" name="updatePrice" id="updatePrice"
-                v-model="product.price" placeholder="Enter Price" required />
+              <label for="updatePrice" class="form-label">user Price</label>
+              <input class="form-control" type="text" name="updatePrice" id="updatePrice"
+                v-model="user.address" placeholder="Enter Price" required />
             </div>
             <!-- genre, status, studio, aired -->
             <!-- quantity -->
             <div class="mb-3">
               <label for="updateQuantity" class="form-label">Quantity</label>
-              <input class="form-control" type="text" name="updateQuantity" id="updateQuantity" v-model="product.quantity"
+              <input class="form-control" type="text" name="updateQuantity" id="updateQuantity" v-model="user.contact"
                 placeholder="update Genres" />
             </div>
 
             <!-- user id -->
-            <!-- <div class="mb-3">
+            <div class="mb-3">
               <label for="updateUserID" class="form-label">UserID</label>
-              <input class="form-control" type="text" name="updateUserID" id="updateUserID" v-model="product.userid"
+              <input class="form-control" type="text" name="updateUserID" id="updateUserID" v-model="user.email"
                 placeholder="Status" />
-            </div> -->
+            </div>
             <!-- </div> -->
           </div>
           <div class="modal-footer">
@@ -61,11 +61,11 @@
 
 <script>
 export default {
-  props: ["product"],
+  props: ["user"],
 
   methods: {
     update() {
-      return this.$store.dispatch("updateProduct", this.product)
+      return this.$store.dispatch("updateUser", this.user)
     }
   }
 }

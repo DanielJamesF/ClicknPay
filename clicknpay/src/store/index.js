@@ -13,8 +13,8 @@ export default createStore({
     // user: {
     //   firstname: "Boi"
     // }
-    user: null
-
+    user: null,
+    users: null
   },
   getters: {},
   mutations: {
@@ -27,6 +27,10 @@ export default createStore({
     },
     setuser: (state, user) => {
       state.user = user;
+      // console.log(user)
+    },
+    setusers: (state, users) => {
+      state.users = users;
       // console.log(user)
     },
     setToken: (state, token) => {
@@ -48,6 +52,62 @@ export default createStore({
         // fetch("https://picknpay-apitest.herokuapp.com/products/" + id)
         .then((res) => res.json())
         .then((data) => context.commit("setproduct", data.results));
+    },
+
+    addProduct: async (context, payload) => {
+      const {
+        prodname,
+        prodimg,
+        quantity,
+        price,
+      } = payload;
+      fetch("http://localhost:3000/products", {
+          // fetch("https://picknpay-apitest.herokuapp.com/register", {
+          method: "POST",
+          body: JSON.stringify({
+            prodname: prodname,
+            prodimg: prodimg,
+            quantity: quantity,
+            price: price,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            "x-auth-token": context.state.token
+          },
+        })
+        .then((res) => res.json())
+        .then((data) => {
+          alert(data.msg);
+          context.dispatch("getProducts")
+        })
+    },
+
+    // updates list
+    updateProduct: async (context, product) => {
+      fetch("http://localhost:3000/products/" + product.id, {
+          method: "PUT",
+          body: JSON.stringify(product),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            "x-auth-token": await context.state.token
+          },
+        })
+        .then((res) => res.json())
+        .then((data) => {
+          alert(data.msg);
+          (context.dispatch("getProducts"))
+        });
+    },
+    // Deletes Item from db
+    deleteProduct: async (context, id) => {
+      fetch("http://localhost:3000/products/" + id, {
+          method: "DELETE",
+          headers: {
+            "x-auth-token": context.state.token
+          }
+        })
+        .then((res) => res.json())
+        .then(() => (context.dispatch("getProducts")));
     },
 
     // adds user to db
@@ -76,18 +136,26 @@ export default createStore({
           }),
           headers: {
             "Content-type": "application/json; charset=UTF-8",
+            "x-auth-token": context.state.token
           },
         })
         .then((response) => response.json())
         .then((data) => {
-          alert(data.msg)
-        })
-        .then(() => (context.dispatch("getProducts")))
-        .then(() => (context.commit("setuser", user)));
-      // console.log(payload)
-      router.push({
-        name: "products"
-      })
+          if (data.msg === "Registration Successful") {
+            alert(data.msg)
+            let user = data.user
+            let token = data.token
+            context.commit("setuser", user)
+            context.commit("setToken", token);
+            context.dispatch("getProducts");
+            router.push({
+              name: "products"
+            })
+          } else {
+            alert(data.msg)
+            document.getElementById("register").reset();
+          }
+        });
     },
 
     login: async (context, payload) => {
@@ -104,7 +172,7 @@ export default createStore({
           }),
           headers: {
             "Content-type": "application/json; charset=UTF-8",
-            "x-auth-token": context.state.token
+            "x-auth-token": await context.state.token
           },
         })
         .then((response) => response.json())
@@ -114,32 +182,24 @@ export default createStore({
           let token = data.token
           context.commit("setuser", user)
           context.commit("setToken", token);
-          router.push('/')
+          router.push({
+            name: "products"
+          })
         })
     },
 
-    // updates list
-    updateProduct: async (context, product) => {
-      fetch("http://localhost:3000/products/" + product.id, {
-          method: "PUT",
-          body: JSON.stringify(product),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-          },
-        })
+    // retrieves all users
+    getusers: async (context) => {
+      fetch("http://localhost:3000/users", {
+        headers : {
+          "x-auth-token": await context.state.token
+        } 
+      })
+        // fetch("https://picknpay-apitest.herokuapp.com/products")
         .then((res) => res.json())
-        .then(() => (context.dispatch("getProducts")));
-    },
-    // Deletes Item from db
-    deleteProduct: async (context, id) => {
-      fetch("http://localhost:3000/products/" + id, {
-          method: "DELETE",
-          headers: {
-            "x-auth-token": context.state.token
-          }
-        })
-        .then((res) => res.json())
-        .then(() => (context.dispatch("getProducts")));
+        .then((data) => {
+          context.commit("setusers", data.results);
+        });
     },
   },
   modules: {},

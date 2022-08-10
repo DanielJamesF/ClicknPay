@@ -1,27 +1,27 @@
 <template>
   <div v-if="user">
-    <div v-if="products">
+    <div v-if="users">
       <div class="container text-center">
         <h2 class="text-black">User: {{ user.firstname }}</h2>
         <table class="table">
           <thead>
             <tr>
               <th scope="col">ID</th>
-              <th scope="col">Product Name</th>
-              <th scope="col">Product Quantity</th>
-              <th scope="col">User ID</th>
-              <th scope="col">
+              <th scope="col">User Name</th>
+              <th scope="col">User Title</th>
+              <th scope="col">User Email Address</th>
+              <!-- <th scope="col">
                 <a data-bs-toggle="modal" data-bs-target="#addnew" class="btn">
                   <i class="fa-regular fa-square-plus"></i>
                 </a>
-              </th>
+              </th> -->
             </tr>
           </thead>
-          <tr v-for="product in products" :key="product">
-            <td>{{ product.id }}</td>
-            <td>{{ product.prodname }}</td>
-            <td>{{ product.quantity }}</td>
-            <td>{{ product.userid }}</td>
+          <tr v-for="user in users" :key="user">
+            <td>{{ user.id }}</td>
+            <td>{{ user.firstname }}</td>
+            <td>{{ user.usertype }}</td>
+            <td>{{ user.email }}</td>
 
             <!-- icons -->
             <td>
@@ -30,7 +30,7 @@
                 type="button"
                 class="btn"
                 data-bs-toggle="modal"
-                :data-bs-target="'#update' + product.id"
+                :data-bs-target="'#update' + user.id"
                 ><i class="fa-solid fa-pen-to-square"></i
               ></a>
 
@@ -38,11 +38,11 @@
               <a
                 class="btn"
                 id="delete"
-                @click="$store.dispatch('deleteProduct', product.id)"
+                @click="$store.dispatch('deleteuser', user.id)"
                 ><i class="fa-solid fa-trash-can"></i
               ></a>
             </td>
-            <UpdateModal :product="product" />
+            <UpdateUserModal :user="user" />
           </tr>
         </table>
       </div>
@@ -59,16 +59,16 @@
 
 <script>
 import CreateModal from "@/components/createModal.vue";
-import UpdateModal from "@/components/updateModal.vue";
+import UpdateUserModal from "@/components/updateUserModal.vue";
 
 export default {
-  components: { CreateModal, UpdateModal },
+  components: { CreateModal, UpdateUserModal },
   mounted() {
-    this.$store.dispatch("getProducts");
+    this.$store.dispatch("getusers");
   },
   computed: {
-    products() {
-      return this.$store.state.products;
+    users() {
+      return this.$store.state.users;
     },
     // returns value from store
     user() {

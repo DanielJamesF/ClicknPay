@@ -7,7 +7,10 @@ const path = require("path");
 const db = require("./config/dbconn");
 const jwt = require("jsonwebtoken");
 const middleware = require("./middleware/auth");
-const { compare, hash } = require("bcrypt");
+const {
+  compare,
+  hash
+} = require("bcrypt");
 // Express app
 const app = express();
 // Express router
@@ -59,22 +62,29 @@ router.post("/register", bodyParser.json(), async (req, res) => {
     let date = {
       date: new Date().toLocaleDateString(),
     };
-    // let cart = {
-    //   cart,
-    // };
+    let cart = {
+      cart: null
+    };
 
     db.query(emailQ, email, async (err, results) => {
       if (err) throw err;
       if (results.length > 0) {
-        res.send("Email Exists");
+        res.json({
+          msg: "Email Exists"
+        });
       } else {
         // Encrypting a password
         // Default value of salt is 10.
         bd.password = await hash(bd.password, 10);
         // Query
-        const strQry = `INSERT INTO users(firstname, lastname, email, usertype, contact, address, password, joindate)  
-        VALUES(?, ?, ?, ?, ?, ?, ?, ?)`;
-
+        const strQry = `
+        
+        ALTER TABLE users AUTO_INCREMENT = 1;
+        
+        INSERT INTO users(firstname, lastname, email, usertype, contact, address, password, joindate)  
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?);
+        `
+       ;
         db.query(
           strQry,
           [
@@ -89,10 +99,32 @@ router.post("/register", bodyParser.json(), async (req, res) => {
           ],
           (err, results) => {
             if (err) throw err;
-            res.json({
-              msg: "Registration Successful",
-              results: results,
-            });
+            const payload = {
+              user: {
+                firstname: bd.firstname,
+                lastname: bd.lastname,
+                email: bd.email,
+                usertype: bd.usertype,
+                contact: bd.contact,
+                address: bd.address,
+                cart: cart.cart,
+              }
+            }
+            jwt.sign(
+              payload,
+              process.env.jwtSecret, {
+                expiresIn: "365d",
+              },
+              (err, token) => {
+                if (err) throw err;
+                res.json({
+                  msg: "Registration Successful",
+                  user: payload.user,
+                  token: token,
+                });
+                // res.json(payload.user);
+              }
+            );
           }
         );
       }
@@ -109,14 +141,17 @@ router.post("/register", bodyParser.json(), async (req, res) => {
 //   "usertype": "",
 //   "contact": "0695585895",
 //   "address": "blank",
-//   "password": "password",
+//   "password": "password"
 // }
 
 // Login
 router.post("/login", bodyParser.json(), (req, res) => {
   try {
     // Get email and password
-    const { email, password } = req.body;
+    const {
+      email,
+      password
+    } = req.body;
     const strQry = `
         SELECT *
         FROM users 
@@ -151,8 +186,7 @@ router.post("/login", bodyParser.json(), (req, res) => {
           };
           jwt.sign(
             payload,
-            process.env.jwtSecret,
-            {
+            process.env.jwtSecret, {
               expiresIn: "365d",
             },
             (err, token) => {
@@ -183,7 +217,7 @@ router.post("/login", bodyParser.json(), (req, res) => {
 // }
 
 // Verify
-router.get("/users/verify", (req, res) => {
+router.get("/verify", (req, res) => {
   const token = req.header("x-auth-token");
   jwt.verify(token, process.env.jwtSecret, (error, decodedToken) => {
     if (error) {
@@ -208,7 +242,7 @@ router.get("/users", middleware, (req, res) => {
     if (err) throw err;
     res.json({
       status: 200,
-      results: results,
+      results: results<= 0 ? "Sorry, no product was found." : results,
       test: req.user.id,
     });
   });
@@ -253,18 +287,24 @@ router.put("/users/:id", middleware, (req, res) => {
 });
 
 // Delete users
-router.delete("/users/:id", (req, res) => {
-  // Query
-  const strQry = `
-    DELETE FROM users 
-    WHERE id = ?;
-    `;
-  db.query(strQry, [req.params.id], (err, data, fields) => {
-    if (err) throw err;
-    res.json({
-      msg: "Item Deleted",
+router.delete("/users/:id", middleware, (req, res) => {
+  if (req.user.usertype === "Admin") {
+    // Query
+    const strQry = `
+      DELETE FROM users 
+      WHERE id = ?;
+      `;
+    db.query(strQry, [req.params.id], (err, data, fields) => {
+      if (err) throw err;
+      res.json({
+        msg: "Item Deleted",
+      });
     });
-  });
+  } else {
+    res.json({
+      msg: "Only Admins are Allowed to do this, please get on my level"
+    })
+  }
 });
 
 // ===========================================================================================
@@ -300,7 +340,9 @@ router.get("/users/:id/cart", middleware, (req, res) => {
 // add cart items
 router.post("/users/:id/cart", middleware, bodyParser.json(), (req, res) => {
   try {
-    let { id } = req.body;
+    let {
+      id
+    } = req.body;
     const qCart = ` SELECT cart
     FROM users
     WHERE id = ?;
@@ -325,13 +367,13 @@ router.post("/users/:id/cart", middleware, bodyParser.json(), (req, res) => {
 
         let product = results
         //{
-          // prodid: results[0].id,
-          // prodname: results[0].prodname,
-          // prodimg: results[0].prodimg,
-          // quantity: results[0].quantity,
-          // price: results[0].price,
-          // totalamount: results[0].totalamount,
-          // userid: results[0].userid,
+        // prodid: results[0].id,
+        // prodname: results[0].prodname,
+        // prodimg: results[0].prodimg,
+        // quantity: results[0].quantity,
+        // price: results[0].price,
+        // totalamount: results[0].totalamount,
+        // userid: results[0].userid,
         // };
 
         cart.push(product);
@@ -366,7 +408,7 @@ router.delete("/users/:id/cart", middleware, (req, res) => {
   FROM users
   WHERE id = ?`
 
-  db.query(dCart, req.user.id, (err, results)=> {
+  db.query(dCart, req.user.id, (err, results) => {
     // let cart = 
   })
   const strQry = `
@@ -405,10 +447,10 @@ router.post("/products", middleware, bodyParser.json(), (req, res) => {
           bd.prodimg,
           bd.quantity,
           bd.price,
-          bd.totalamount,
+          bd.totalamount, 
           req.user.id,
         ],
-        (err, results) => {
+        (err) => {
           if (err) throw err;
           res.json({
             added: bd,
@@ -476,29 +518,36 @@ router.get("/products/:id", (req, res) => {
 });
 
 // Update product
-router.put("/products/:id", (req, res) => {
-  const bd = req.body;
-  // Query
-  const strQry = `UPDATE products
-     SET ?
-     WHERE id = ?`;
-
-  db.query(strQry, [bd.id], (err, data) => {
-    if (err) throw err;
+router.put('/products/:id', middleware, bodyParser.json(), async (req, res) => {
+  const {
+    prodname,
+    prodimg,
+    price,
+    quantity
+  } = req.body
+  let sql = `UPDATE products SET ? WHERE id = ${req.params.id} `
+  const product = {
+    prodname,
+    prodimg,
+    price,
+    quantity
+  }
+  db.query(sql, product, (err) => {
+    if (err) throw err
     res.json({
-      msg: "Item Updated",
-    });
-  });
+     msg : "Updated Item Successfully"
+    })
+  })
 });
 
 // Delete product
-router.delete("/products/:id", (req, res) => {
+router.delete("/products/:id", middleware, (req, res) => {
   // Query
   const strQry = `
     DELETE FROM products 
     WHERE id = ?;
     `;
-  db.query(strQry, [req.params.id], (err, data, fields) => {
+  db.query(strQry, [req.params.id], (err) => {
     if (err) throw err;
     res.json({
       msg: "Item Deleted",
