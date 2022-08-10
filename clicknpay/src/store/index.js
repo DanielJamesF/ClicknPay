@@ -49,7 +49,7 @@ export default createStore({
         .then((res) => res.json())
         .then((data) => context.commit("setproduct", data.results));
     },
-// test
+
     // adds user to db
     register: async (context, payload) => {
       const {
