@@ -6,10 +6,35 @@
     <router-link to="/login">Login</router-link> |
     <router-link to="/register">Register</router-link> |
     <router-link to="/admin">Admin</router-link> |
-    <router-link to="/users">Users</router-link>
+    <router-link to="/users">Users</router-link> |
+    <router-link to="/cart">Cart</router-link> 
+    <div v-if="user">
+    <button class="btn" @click="logout">Logout</button>
+    </div>
   </nav>
   <router-view/>
 </template>
+
+<script>
+export default {
+  mounted() {
+    
+  },
+  computed: {
+    user() {
+      return this.$store.state.user
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.state.user = null
+      this.$store.state.cart = null
+      this.$store.state.token = null
+      document.getElementById("login").reset()
+    }
+  },
+}
+</script>
 
 <style>
 #app {

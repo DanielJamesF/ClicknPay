@@ -7,7 +7,7 @@
         <div >
             <div class="container">
                 <div class="row mx-auto">
-                    <div v-for="product in products" :key="product" class="card p-3 m-auto" style="width: 18rem; height: 500px;">
+                    <div v-for="product in products" :key="product" class="card p-3 m-3 mx-auto" style="width: 18rem; height: fit-content;">
                         <h2>{{ product.prodname }}</h2>
                         <img :src="product.prodimg" class="card-img-top" alt="">
                         <router-link :to="{ name: 'product', params: { id: product.id } }">

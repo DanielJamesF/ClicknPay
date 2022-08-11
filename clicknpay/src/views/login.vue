@@ -1,7 +1,7 @@
 <template>
   <div class="container text-center">
     <div class="row d-flex justify-content-center align-content-center">
-      <form class="w-50 mx-auto bg-white p-5 form" @submit.prevent="login">
+      <form id="login" class="w-50 mx-auto bg-white p-5 form" @submit.prevent="login">
         <h2 style="font-size: 3vw">Login</h2>
 
         <div class="form-group mb-3">

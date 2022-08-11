@@ -16,16 +16,30 @@
                 placeholder="Enter Name:" required />
             </div>
 
-            <!-- Image URL -->
+            <!-- lastname -->
             <div class="mb-3">
-              <label for="updateimg" class="form-label">Image URL</label>
-              <input class="form-control" type="text" name="updateimg" id="updateimg" v-model="user.lastname"
+              <label for="updateName" class="form-label">Lastname :</label>
+              <input class="form-control" type="text" v-model="user.lastname"
+                placeholder="Enter Name:" required />
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="updateimg" class="form-label">Email </label>
+              <input class="form-control" type="text" name="updateimg" id="updateimg" v-model="user.email"
                 placeholder="episode count" />
             </div>
 
-            <!-- Price -->
+            <!-- Address -->
             <div class="mb-3">
-              <label for="updatePrice" class="form-label">user Price</label>
+              <label for="updatePrice" class="form-label">Address</label>
+              <input class="form-control" type="text" name="updatePrice" id="updatePrice"
+                v-model="user.address" placeholder="Enter Price" required />
+            </div>
+
+            <!-- usertype -->
+            <div class="mb-3">
+              <label for="updatePrice" class="form-label">Address</label>
               <input class="form-control" type="text" name="updatePrice" id="updatePrice"
                 v-model="user.address" placeholder="Enter Price" required />
             </div>

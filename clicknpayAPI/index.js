@@ -7,10 +7,8 @@ const path = require("path");
 const db = require("./config/dbconn");
 const jwt = require("jsonwebtoken");
 const middleware = require("./middleware/auth");
-const {
-  compare,
-  hash
-} = require("bcrypt");
+const { compare, hash } = require("bcrypt");
+const e = require("express");
 // Express app
 const app = express();
 // Express router
@@ -63,14 +61,14 @@ router.post("/register", bodyParser.json(), async (req, res) => {
       date: new Date().toLocaleDateString(),
     };
     let cart = {
-      cart: null
+      cart: null,
     };
 
     db.query(emailQ, email, async (err, results) => {
       if (err) throw err;
       if (results.length > 0) {
         res.json({
-          msg: "Email Exists"
+          msg: "Email Exists",
         });
       } else {
         // Encrypting a password
@@ -83,8 +81,7 @@ router.post("/register", bodyParser.json(), async (req, res) => {
         
         INSERT INTO users(firstname, lastname, email, usertype, contact, address, password, joindate)  
         VALUES(?, ?, ?, ?, ?, ?, ?, ?);
-        `
-       ;
+        `;
         db.query(
           strQry,
           [
@@ -108,11 +105,12 @@ router.post("/register", bodyParser.json(), async (req, res) => {
                 contact: bd.contact,
                 address: bd.address,
                 cart: cart.cart,
-              }
-            }
+              },
+            };
             jwt.sign(
               payload,
-              process.env.jwtSecret, {
+              process.env.jwtSecret,
+              {
                 expiresIn: "365d",
               },
               (err, token) => {
@@ -148,10 +146,7 @@ router.post("/register", bodyParser.json(), async (req, res) => {
 router.post("/login", bodyParser.json(), (req, res) => {
   try {
     // Get email and password
-    const {
-      email,
-      password
-    } = req.body;
+    const { email, password } = req.body;
     const strQry = `
         SELECT *
         FROM users 
@@ -186,7 +181,8 @@ router.post("/login", bodyParser.json(), (req, res) => {
           };
           jwt.sign(
             payload,
-            process.env.jwtSecret, {
+            process.env.jwtSecret,
+            {
               expiresIn: "365d",
             },
             (err, token) => {
@@ -233,19 +229,25 @@ router.get("/verify", (req, res) => {
 
 // Get users
 router.get("/users", middleware, (req, res) => {
-  // Query
-  const strQry = `
-    SELECT *
-    FROM users;
-    `;
-  db.query(strQry, (err, results) => {
-    if (err) throw err;
-    res.json({
-      status: 200,
-      results: results<= 0 ? "Sorry, no product was found." : results,
-      test: req.user.id,
+  if (req.user.usertype === "Admin") {
+    const strQry = `
+      SELECT *
+      FROM users;
+      `;
+    db.query(strQry, (err, results) => {
+      if (err) throw err;
+      res.json({
+        status: 200,
+        results: results <= 0 ? "Sorry, no product was found." : results,
+        test: req.user.id,
+      });
     });
-  });
+  } else {
+    res.json({
+      msg: "Only Admins are able to view this, Sumimasen",
+    });
+  }
+  // Query
 });
 
 // Get one users
@@ -270,18 +272,25 @@ router.get("/users/:id", (req, res) => {
   });
 });
 
-// Update product
-router.put("/users/:id", middleware, (req, res) => {
-  const bd = req.body;
+// Update users
+router.put("/users/:id", middleware, bodyParser.json(), (req, res) => {
+  const { firstname, lastname, email, address, usertype } = req.body;
+
+  const user = {
+    firstname,
+    lastname,
+    email,
+    address,
+    usertype,
+  };
   // Query
   const strQry = `UPDATE users
      SET ?
-     WHERE id = ?`;
-
-  db.query(strQry, [bd.id], (err, data) => {
+     WHERE id = ${req.params.id}`;
+  db.query(strQry, user, (err, data) => {
     if (err) throw err;
     res.json({
-      msg: "Item Updated",
+      msg: "User info Updated",
     });
   });
 });
@@ -302,8 +311,8 @@ router.delete("/users/:id", middleware, (req, res) => {
     });
   } else {
     res.json({
-      msg: "Only Admins are Allowed to do this, please get on my level"
-    })
+      msg: "Only Admins are Allowed to do this, please get on my level",
+    });
   }
 });
 
@@ -340,9 +349,7 @@ router.get("/users/:id/cart", middleware, (req, res) => {
 // add cart items
 router.post("/users/:id/cart", middleware, bodyParser.json(), (req, res) => {
   try {
-    let {
-      id
-    } = req.body;
+    let { id } = req.body;
     const qCart = ` SELECT cart
     FROM users
     WHERE id = ?;
@@ -365,16 +372,15 @@ router.post("/users/:id/cart", middleware, bodyParser.json(), (req, res) => {
       db.query(strProd, async (err, results) => {
         if (err) throw err;
 
-        let product = results
-        //{
-        // prodid: results[0].id,
-        // prodname: results[0].prodname,
-        // prodimg: results[0].prodimg,
-        // quantity: results[0].quantity,
-        // price: results[0].price,
-        // totalamount: results[0].totalamount,
-        // userid: results[0].userid,
-        // };
+        let product = {
+          prodid: results[0].id,
+          prodname: results[0].prodname,
+          prodimg: results[0].prodimg,
+          quantity: results[0].quantity,
+          price: results[0].price,
+          totalamount: results[0].totalamount,
+          userid: results[0].userid,
+        };
 
         cart.push(product);
         // res.send(cart)
@@ -393,24 +399,45 @@ router.post("/users/:id/cart", middleware, bodyParser.json(), (req, res) => {
   } catch (error) {
     console.log(error.message);
   }
-
-  // const strQry = `UPDATE users cart
-  //    WHERE id = ?`;
-  // db.query(strQry, [req.params.cart, req.params.id], (err, results) => {
-  //   if (err) throw err;
-  //   res.status(200).json({ results: results });
-  // });
 });
 
-// delete products from cart
+// delete one item from cart
+router.delete("/users/:id/cart/:prodid", middleware, (req, res) => {
+  const dCart = `SELECT cart
+  FROM users
+  WHERE id = ?`;
+  db.query(dCart, req.user.id, (err, results) => {
+    if (err) throw err;
+    let item = JSON.parse(results[0].cart).filter((x) => {
+      return x.prodid != req.params.prodid;
+    });
+    res.send(item)
+    const strQry = `
+  UPDATE users
+  SET cart = ?
+  WHERE id= ? ;
+  `;
+      db.query(
+        strQry,
+        [JSON.stringify(item), req.user.id],
+        (err, data, fields) => {
+          if (err) throw err;
+          res.json({
+            msg: "Item Removed from Cart",
+          });
+        }
+      );
+  });
+});
+
 router.delete("/users/:id/cart", middleware, (req, res) => {
   const dCart = `SELECT cart 
   FROM users
-  WHERE id = ?`
+  WHERE id = ?`;
 
   db.query(dCart, req.user.id, (err, results) => {
-    // let cart = 
-  })
+    // let cart =
+  });
   const strQry = `
   UPDATE users
     SET cart = null
@@ -447,7 +474,7 @@ router.post("/products", middleware, bodyParser.json(), (req, res) => {
           bd.prodimg,
           bd.quantity,
           bd.price,
-          bd.totalamount, 
+          bd.totalamount,
           req.user.id,
         ],
         (err) => {
@@ -518,26 +545,21 @@ router.get("/products/:id", (req, res) => {
 });
 
 // Update product
-router.put('/products/:id', middleware, bodyParser.json(), async (req, res) => {
-  const {
-    prodname,
-    prodimg,
-    price,
-    quantity
-  } = req.body
-  let sql = `UPDATE products SET ? WHERE id = ${req.params.id} `
+router.put("/products/:id", middleware, bodyParser.json(), async (req, res) => {
+  const { prodname, prodimg, price, quantity } = req.body;
+  let sql = `UPDATE products SET ? WHERE id = ${req.params.id} `;
   const product = {
     prodname,
     prodimg,
     price,
-    quantity
-  }
+    quantity,
+  };
   db.query(sql, product, (err) => {
-    if (err) throw err
+    if (err) throw err;
     res.json({
-     msg : "Updated Item Successfully"
-    })
-  })
+      msg: "Updated Item Successfully",
+    });
+  });
 });
 
 // Delete product
