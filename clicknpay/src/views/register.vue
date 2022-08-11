@@ -1,11 +1,11 @@
 <template>
-  <div class="container text-center">
+  <div class="container-fluid text-center">
     <div class="row h-75 d-flex justify-content-center align-content-center">
       <form
         class="w-50 mx-auto p-5 text-black rounded-5"
         @submit.prevent="register"
       >
-        <h2 style="font-size: 3vw">Register</h2>
+        <h2 style="font-size: 3vw" class="text-light">Register</h2>
         <div class="form-group m-3">
           <!-- firstName -->
           <label for="name"></label>
@@ -69,6 +69,7 @@
             v-model="password"
             class="form-control"
             type="password"
+            maxlength="15"
             placeholder="Choose password"
             required
           />
@@ -117,7 +118,15 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.container-fluid {
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-image: url('../assets/wall.jpg');
+    background-position: center;
+}
+form{
+  background-image: url('../assets/wall.jpg');
 }
 </style>
