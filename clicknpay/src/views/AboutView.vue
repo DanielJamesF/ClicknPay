@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <p>約</p>
+    <p> <span>this really is an</span> 約 <span>page</span> </p>
   </div>
 </template>
 
@@ -21,5 +21,8 @@ p {
   align-items: center;
   font-size: 200px;
   color: whitesmoke;
+}
+span{
+  font-size: 50px;
 }
 </style>

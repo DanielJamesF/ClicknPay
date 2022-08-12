@@ -1,5 +1,6 @@
 <template>
     <div v-if="product">
+    <router-link to="/products">return</router-link>
         <h2>{{ product[0].prodname }}</h2>
         <img :src="product[0].prodimg" alt="">
         <button @click="add">add to cart</button>
@@ -11,7 +12,7 @@ export default {
     props: ["id"],
     data() {
         return {
-            // id : this.id
+            id : this.id
         }
     },
 
@@ -45,7 +46,7 @@ export default {
 
 <style scoped>
 div{
-    height: 100vh;
+    height: 80vh;
     padding-top: 100px;
 }
 </style>

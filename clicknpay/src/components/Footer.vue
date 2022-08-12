@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <br>
     <div class="row">
-      <div class="col">
+      <!-- <div class="col">
         <h1>About</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit
@@ -12,7 +12,7 @@
         </p>
       </div>
       <br>
-      <div class="row">
+      <div class="row"> -->
         <div id="links2" class="col">
             <h1>Social links</h1>
             <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>
@@ -37,7 +37,7 @@
           <br />
           <router-link to="/contact">- Contact us</router-link>
         </div>
-      </div>
+      <!-- </div> -->
     </div>
     <p>Copyright &copy; All Rights Reserved by ClicknPay.</p>
   </div>
@@ -60,7 +60,7 @@ a {
 #links {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
 }
 #links2 {
     display: flex;

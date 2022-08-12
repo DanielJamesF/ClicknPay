@@ -1,5 +1,5 @@
 <template>
-  <div v-if="user">
+  <div class="container-fluid" v-if="user">
     <div v-if="users">
       <div class="container text-center">
         <h2 class="text-black">User: {{ user.firstname }}</h2>
@@ -79,6 +79,9 @@ export default {
 </script>
 
 <style scoped>
+.container-fluid{
+  height: 100vh;
+}
 th {
   color: red;
 }

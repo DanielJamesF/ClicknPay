@@ -268,6 +268,8 @@ export default createStore({
       .then((data) => {
         alert(data.msg)
         context.dispatch("getCart")
+        context.state.cart = null
+
       })
     },
 

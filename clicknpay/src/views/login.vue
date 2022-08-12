@@ -26,7 +26,7 @@
         </div>
 
         <button type="submit" class="btn btn-dark">Submit</button>
-        <button type="button" @click="verify()" class="btn btn-dark">Verify</button>
+      
       </form>
 
      <router-link :to="{ name: 'register' }">
@@ -55,9 +55,6 @@ export default {
         email: this.email,
         password: this.password,
       });
-    },
-    verify() {
-      return this.$store.dispatch("verify")
     },
   },
 

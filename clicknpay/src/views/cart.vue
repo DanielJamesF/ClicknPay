@@ -1,8 +1,8 @@
 <template>
-    <div v-if="cart">
+    <div v-if="cart" class="p-4 m-3">
         <div class="container">
             <div class="row mx-auto">
-                <button @click="removeAll">Remove all</button>
+                <button class="btn btn-primary" @click="removeAll">Remove all</button>
                 <div v-for="item in cart" :key="item" :item="item" class="card m-3 p-3" style="width: 18rem; height: fit-content;">
                     <h2>{{ item.prodname }}</h2>
                     <img :src="item.prodimg" alt="">
