@@ -43,5 +43,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+div{
+    height: 100vh;
+    padding-top: 100px;
+}
 </style>

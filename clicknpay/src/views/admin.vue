@@ -49,7 +49,7 @@
     </div>
   </div>
 
-  <div v-else class="text-center">
+  <div id="else" v-else class="text-center">
     <h1>Please Login to view Data</h1>
   </div>
   <!--  -->
@@ -79,12 +79,21 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  height: 100vh;
+}
+#else {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 th {
   color: red;
 }
-td {
-  /* color: white; */
-}
+/* td {
+  color: white;
+} */
 
 i {
   color: red;

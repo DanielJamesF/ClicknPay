@@ -1,8 +1,9 @@
 <template>
-  <div class="container text-center">
+  <div class="container-fluid text-center">
     <div class="row d-flex justify-content-center align-content-center">
-      <form id="login" class="w-50 mx-auto bg-white p-5 form" @submit.prevent="login">
-        <h2 style="font-size: 3vw">Login</h2>
+
+      <form id="login" class="mx-auto bg-white p-5 form rounded-5" @submit.prevent="login">
+        <h2 style="font-size: 3vw" class="text-light">Login</h2>
 
         <div class="form-group mb-3">
           <input
@@ -25,9 +26,10 @@
         </div>
 
         <button type="submit" class="btn btn-dark">Submit</button>
+        <button type="button" @click="verify()" class="btn btn-dark">Verify</button>
       </form>
 
-      <router-link :to="{ name: 'register' }">
+     <router-link :to="{ name: 'register' }">
         <a style="font-size: 30px" class="nav-link"> Register</a>
       </router-link>
     </div>
@@ -54,6 +56,9 @@ export default {
         password: this.password,
       });
     },
+    verify() {
+      return this.$store.dispatch("verify")
+    },
   },
 
   computed: {
@@ -65,4 +70,16 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.container-fluid {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../assets/wall.jpg');
+  background-position: center;
+}
+form{
+  background-image: url('../assets/wall.jpg');
+}
+</style>
