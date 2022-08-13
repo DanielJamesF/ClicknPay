@@ -1,27 +1,36 @@
 <template>
-  <div class="container-fluid">
-    <!-- <div id="hello">
-      <h1>Hello I am products</h1>
-    </div> -->
-    <div v-if="user">
-      <h2 id="welcome">Welcome {{ user.firstname }}</h2>
-    </div>
-      <!-- <h3>Click on products to view</h3> -->
-    <div id="products" v-if="products">
+  <section id="products" class="p-3">
+    <div class="container">
+      <div v-if="user">
+        <h2 id="welcome">Welcome {{ user.firstname }}</h2>
+      </div>
+      <div v-if="products">
       <div class="container">
-        <div id="rrow" class="row mx-auto">
-          <div v-for="product in products" :key="product" class="card p-3 m-auto" style="width: 18rem; height: 450px">
-            <h2>{{ product.prodname }}</h2>
-            <router-link :to="{ name: 'product', params: { id: product.id } }">
-            <img :src="product.prodimg" class="card-img-top" alt="" />
-            </router-link>
-              <button class="btn btn-primary">Single</button>
+        <div class="row mx-auto">
+          <div
+            v-for="product in products"
+            :key="product"
+            class="card mx-auto m-3 p-1"
+            style="width: 20rem"
+          >
+          <div class="my-auto">
+            <img :src="product.prodimg" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">{{ product.prodname }}</h5>
+              <p class="card-text">Price: R{{ product.price }}.00</p>
+              <router-link
+                :to="{ name: 'product', params: { id: product.id } }"
+              >
+                <a href="#" class="btn btn-primary">View Item</a>
+              </router-link>
+            </div>
+          </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
+    </div>
+  </section>
 </template>
 
 <script>
@@ -42,7 +51,14 @@ export default {
 </script>
 
 <style scoped>
-.container-fluid {
+#products {
+  min-height: 100vh;
+}
+
+.card img{
+
+}
+/* .container-fluid {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -55,7 +71,7 @@ export default {
   align-items: center;
   position: absolute;
   top: 100px;
-  /* z-index: -1; */
+  z-index: -1;
 }
 
 #rrow {
@@ -63,5 +79,5 @@ export default {
 }
 a:hover{
   cursor: pointer;
-}
+} */
 </style>

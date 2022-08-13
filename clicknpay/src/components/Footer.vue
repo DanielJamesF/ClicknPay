@@ -1,19 +1,8 @@
 <template>
-  <div class="container-fluid">
-    <br>
+<section id="footer" class="p-2">
+<div class="container">
     <div class="row">
-      <!-- <div class="col">
-        <h1>About</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit
-          suscipit in fuga eum nesciunt. Tempore deserunt, qui repellat quas
-          delectus ipsa sequi repellendus voluptatem quis, fugit, aliquid harum
-          modi dolore.
-        </p>
-      </div>
-      <br>
-      <div class="row"> -->
-        <div id="links2" class="col">
+        <div id="links2" class="col-md-6">
             <h1>Social links</h1>
             <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>
             <br>
@@ -25,7 +14,7 @@
             <br>
             <a href="https://twitter.com/i/flow/login"><i class="bi bi-twitter"></i></a>
         </div>
-        <div id="links" class="col">
+        <div id="links" class="col-md-6">
           <h1>Quick links</h1>
           <router-link to="/">- Home page</router-link>
           <br />
@@ -41,14 +30,22 @@
     </div>
     <p>Copyright &copy; All Rights Reserved by ClicknPay.</p>
   </div>
+</section>
+  
 </template>
 
 <script>
-export default {};
+export default {
+
+};
 </script>
 
 <style scoped>
-.container-fluid {
+#footer {
+  min-height: 10vh;
+  background-color: black;
+}
+/* .container-fluid {
   position: sticky;
   background-color: black;
   color: white;
@@ -66,5 +63,5 @@ a {
     display: flex;
     flex-direction: column;
     font-size: 15px;
-}
+} */
 </style>
