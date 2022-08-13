@@ -32,14 +32,16 @@
 // This file will create a connection to the database
 const mysql = require("mysql");
 require('dotenv').config()
+const { createPool } = require('mysql');
 // Here to is use across multiple files. Used to make SQL queries to DB
-const con = mysql.createConnection({
+const con = createPool({
         host: process.env.DBHOST,
         user: process.env.DBUSER,
         password: process.env.DBPASSWORD,
         port: process.env.dbPORT,
         database: process.env.DBNAME,
-        multipleStatements: true
+        multipleStatements: true,
+        connectionLimit: 10
 });
 
 module.exports = con;

@@ -7,8 +7,8 @@
           <thead>
             <tr>
               <th scope="col">ID</th>
-              <th scope="col">Anime Title</th>
-              <th scope="col">Genres</th>
+              <th scope="col">Product Name</th>
+              <th scope="col">Product Quantity</th>
               <th scope="col">User ID</th>
               <th scope="col">
                 <a data-bs-toggle="modal" data-bs-target="#addnew" class="btn">

@@ -1,18 +1,17 @@
 <template>
   <div class="container-fluid">
-
     <form
       id="form"
       action="https://formspree.io/f/xdobpjrz"
       method="post"
-      class="form-control"
+      class="form-control "
     >
     <h1>Get in touch...</h1>
       <label for="name">Name</label>
       <input type="text" name="name" class="form-control" placeholder="Enter Name" required />
       <br />
       <br />
-      <label for="surname" class="pt-1">Surname </label>
+      <label for="surname">Surname </label>
       <input
         class="form-control"
         name="surname"
@@ -41,7 +40,7 @@
         placeholder="Leave a message to let us know how we can improve our services &#128512;"
       ></textarea>
       <br />
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="button" class="btn btn-primary">Submit</button>
     </form>
   </div>
 </template>
@@ -52,18 +51,25 @@ export default {};
 
 <style scoped>
 .container-fluid {
-  height: 100vh;
+  min-height: 100vh;
+  padding-top: 95px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url('../assets/wall.jpg');
-  background-position: center;
+  background-image: url('../assets/wow.gif');
+  background-blend-mode: multiply;
+  background-color: red;
 }
 #form {
-  width: 30%;
   text-align: center;
+  width: 40%;
   background-image: url('../assets/wall.jpg');
+  background-position: center;
   color: white;
+}
+@media (max-width: 992px){
+  #form{
+    width:50%;
+  }
 }
 </style>

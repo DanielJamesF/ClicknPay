@@ -1,12 +1,16 @@
 <template>
   <div class="container-fluid">
     <div id="row1" class="row">
-      <div class="col">
-        <img id="go" src="../assets/go.png" alt="go" /><span>F</span><span><img src="../assets/itsani.jpg" alt="I"></span>
-        <!-- <router-link to="/loginregister">Click</router-link> -->
-        <!-- <span id="n"> 'n </span><span id="pay">Pay</span> -->
+      <div id="logo" class="col ">
+        <img id="go" src="../assets/go.png" alt="go" />
+        <span>F</span>
+        <span><img src="../assets/ittsreallyani.png" alt="I" /></span
+        ><span>G</span>
+        <span>U</span>
+        <span>R</span>
+        <span>E</span>
       </div>
-        <div class="row">
+      <div id="loginregister" class="row">
           <div class="col">
             <router-link id="login" to="/login">Login</router-link>
           </div>
@@ -27,7 +31,7 @@ export default {
 <style scoped>
 .container-fluid {
   height: 100vh;
-  /* background-image: url("../assets/wow.gif"); */
+  background-image: url("../assets/wow.gif");
   background-color: white;
   background-blend-mode: multiply;
   background-position: center;
@@ -35,69 +39,50 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: auto;
 }
-/* #row1 {w
-
-} */
-/* .col-6{
-    border-top: solid 1px white;
-    border-bottom: solid 1px white;
-    border-radius: 50px;
-} */
 span {
   font-size: 60px;
 }
-#n {
-  padding: 4px;
-  color: white;
-}
-#pay {
-  border-right: solid white 4px;
-  border-left: solid white 4px;
-  border-radius: 50px;
-  padding: 5px;
-  color: white;
-  background-color: blue;
-}
-/* a {
+a {
   text-decoration: none;
   font-size: 60px;
-  border-left: solid blue 4px;
-  border-right: solid blue 4px;
   border-radius: 50px;
-  padding: 4px;
-  background-color: white;
-  color: blue;
-} */
+  padding: 5px;
+  font-size: 25px;
+}
 #go {
-  aspect-ratio: 1;
-  border-radius: 190px;
-  border: solid;
+  padding: 22px;
 }
-a{
-  text-decoration: none;
-  border-radius: 11px;
-  padding: 4px;
-  font-size: 20px;
-}
-#login{
+#login {
   border: solid white 1px;
   color: white;
   background-color: blue;
 }
-#login:hover{
-   border: solid blue 1px;
-  color: blue;
-  background-color: white;
-}
-#register{
+#login:hover {
   border: solid blue 1px;
   color: blue;
   background-color: white;
 }
-#register:hover{
+#register {
+  border: solid blue 1px;
+  color: blue;
+  background-color: white;
+}
+#register:hover {
   border: solid white 1px;
   color: white;
   background-color: blue;
+}
+span {
+  font-size: 50px;
+  padding: 20px;
+}
+#logo{
+  border-radius: 180px;
+  background-color: #fff;
+}
+#loginregister{
+  padding: 10px;
 }
 </style>

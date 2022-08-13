@@ -3,7 +3,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Update Anime</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Update Product</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -16,33 +16,33 @@
                 placeholder="Enter Name:" required />
             </div>
 
-            <!-- episodes -->
+            <!-- Image URL -->
             <div class="mb-3">
-              <label for="updateEp" class="form-label">Episodes</label>
-              <input class="form-control" type="number" name="updateEp" id="updateEp" v-model="product.prodimg"
+              <label for="updateimg" class="form-label">Image URL</label>
+              <input class="form-control" type="text" name="updateimg" id="updateimg" v-model="product.prodimg"
                 placeholder="episode count" />
             </div>
 
-            <!-- season -->
+            <!-- Price -->
             <div class="mb-3">
-              <label for="updateSeason" class="form-label">Seasons</label>
-              <input class="form-control" type="number" name="updateSeason" id="updateSeason"
-                v-model="product.seasonCount" placeholder="Enter Price" required />
+              <label for="updatePrice" class="form-label">Product Price</label>
+              <input class="form-control" type="number" name="updatePrice" id="updatePrice"
+                v-model="product.price" placeholder="Enter Price" required />
             </div>
             <!-- genre, status, studio, aired -->
-            <!-- genre -->
+            <!-- quantity -->
             <div class="mb-3">
-              <label for="updateGenre" class="form-label">Genre</label>
-              <input class="form-control" type="text" name="updateGenre" id="updateGenre" v-model="product.price"
+              <label for="updateQuantity" class="form-label">Quantity</label>
+              <input class="form-control" type="text" name="updateQuantity" id="updateQuantity" v-model="product.quantity"
                 placeholder="update Genres" />
             </div>
 
-            <!-- status -->
-            <div class="mb-3">
-              <label for="updateStatus" class="form-label">UserID</label>
-              <input class="form-control" type="text" name="updateStatus" id="updateStatus" v-model="product.userid"
+            <!-- user id -->
+            <!-- <div class="mb-3">
+              <label for="updateUserID" class="form-label">UserID</label>
+              <input class="form-control" type="text" name="updateUserID" id="updateUserID" v-model="product.userid"
                 placeholder="Status" />
-            </div>
+            </div> -->
             <!-- </div> -->
           </div>
           <div class="modal-footer">

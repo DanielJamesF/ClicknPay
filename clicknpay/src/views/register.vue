@@ -1,8 +1,8 @@
 <template>
   <div class="container-fluid text-center">
     <div class="row h-75 d-flex justify-content-center align-content-center">
-      <form
-        class="w-50 mx-auto p-5 text-black rounded-5"
+      <form id="register"
+        class="form-control w-50 mx-auto p-5 text-black"
         @submit.prevent="register"
       >
         <h2 style="font-size: 3vw" class="text-light">Register</h2>
@@ -123,10 +123,12 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-image: url('../assets/wall.jpg');
-    background-position: center;
+    background-image: url('../assets/wow.gif');
+    background-blend-mode: multiply;
+    background-color: red;
 }
 form{
   background-image: url('../assets/wall.jpg');
+  background-position: center;
 }
 </style>
