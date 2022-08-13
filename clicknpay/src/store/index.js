@@ -10,10 +10,10 @@ export default createStore({
     products: null,
     product: null,
     token: null,
-    user: {
-      firstname: "Boi"
-    },
-    // user: null,
+    // user: {
+    //   firstname: "Boi"
+    // },
+    user: null,
     users: null,
     cart: null,
   },
@@ -46,15 +46,15 @@ export default createStore({
   actions: {
     // retrieves all products
     getProducts: async (context) => {
-      fetch("http://localhost:3000/products")
-        // fetch("https://picknpay-apitest.herokuapp.com/products")
+      // fetch("http://localhost:3000/products")
+      fetch("https://node-eomp-api.herokuapp.com/products")
         .then((res) => res.json())
         .then((data) => context.commit("setproducts", data.results));
     },
     // retrieves single
     getProduct: async (context, id) => {
-      fetch("http://localhost:3000/products/" + id)
-        // fetch("https://picknpay-apitest.herokuapp.com/products/" + id)
+      // fetch("http://localhost:3000/products/" + id)
+      fetch("https://node-eomp-api.herokuapp.com/products/" + id)
         .then((res) => res.json())
         .then((data) => context.commit("setproduct", data.results));
     },
@@ -66,8 +66,8 @@ export default createStore({
         quantity,
         price
       } = payload;
-      fetch("http://localhost:3000/products", {
-          // fetch("https://picknpay-apitest.herokuapp.com/register", {
+      // fetch("http://localhost:3000/products", {
+      fetch("https://node-eomp-api.herokuapp.com/products", {
           method: "POST",
           body: JSON.stringify({
             prodname: prodname,
@@ -89,7 +89,8 @@ export default createStore({
 
     // updates list
     updateProduct: async (context, product) => {
-      fetch("http://localhost:3000/products/" + product.id, {
+      // fetch("http://localhost:3000/products/" + product.id, {
+      fetch("https://node-eomp-api.herokuapp.com/products/" + product.id, {
           method: "PUT",
           body: JSON.stringify(product),
           headers: {
@@ -105,7 +106,8 @@ export default createStore({
     },
     // Deletes Item from db
     deleteProduct: async (context, id) => {
-      fetch("http://localhost:3000/products/" + id, {
+      // fetch("http://localhost:3000/products/" + id, {
+      fetch("https://node-eomp-api.herokuapp.com/products/" + id, {
           method: "DELETE",
           headers: {
             "x-auth-token": context.state.token,
@@ -127,8 +129,8 @@ export default createStore({
         password,
       } = payload;
       // firstname, lastname, email, usertype, contact, address, password, joindate, cart
-      fetch("http://localhost:3000/users", {
-          // fetch("https://picknpay-apitest.herokuapp.com/register", {
+      // fetch("http://localhost:3000/users", {
+      fetch("https://node-eomp-api.herokuapp.com/users", {
           method: "POST",
           body: JSON.stringify({
             firstname: firstname,
@@ -168,7 +170,8 @@ export default createStore({
         email,
         password
       } = payload;
-      fetch("http://localhost:3000/users", {
+      // fetch("http://localhost:3000/users", {
+      fetch("https://node-eomp-api.herokuapp.com/users", {
           method: "PATCH",
           body: JSON.stringify({
             email: email,
@@ -196,7 +199,8 @@ export default createStore({
 
     // Deletes user from db
     deleteuser: async (context, id) => {
-      fetch("http://localhost:3000/users/" + id, {
+      // fetch("http://localhost:3000/users/" + id, {
+      fetch("https://node-eomp-api.herokuapp.com/users/" + id, {
           method: "DELETE",
           headers: {
             "x-auth-token": context.state.token,
@@ -208,7 +212,8 @@ export default createStore({
 
     // update user infor
     updateUser: async (context, user) => {
-      fetch("http://localhost:3000/users/" + user.id, {
+      // fetch("http://localhost:3000/users/" + user.id, {
+      fetch("https://node-eomp-api.herokuapp.com/users/" + user.id, {
           method: "PUT",
           body: JSON.stringify(user),
           headers: {
@@ -233,7 +238,8 @@ export default createStore({
 
     // retrieves all users
     getusers: async (context) => {
-      fetch("http://localhost:3000/users", {
+      // fetch("http://localhost:3000/users", {
+      fetch("https://node-eomp-api.herokuapp.com/users", {
           headers: {
             "x-auth-token": await context.state.token,
           },
@@ -248,7 +254,8 @@ export default createStore({
     // Cart stuffs
     getCart: async (context, id) => {
       id = context.state.user.id;
-      fetch("http://localhost:3000/users/" + id + "/cart", {
+      // fetch("http://localhost:3000/users/" + id + "/cart", {
+      fetch("https://node-eomp-api.herokuapp.com/users/" + id + "/cart", {
           method: "GET",
           headers: {
             "Content-type": "application/json; charset=UTF-8",
@@ -266,7 +273,7 @@ export default createStore({
 
     deleteCart: async (context, userid) => {
       userid = context.state.user.id
-      fetch("http://localhost:3000/users/" + userid + "/cart", {
+      fetch("https://node-eomp-api.herokuapp.com/users/" + userid + "/cart", {
           method: "DELETE",
           headers: {
             "Content-type": "application/json; charset=UTF-8",
@@ -284,9 +291,8 @@ export default createStore({
 
     addToCart: async (context, id, userid) => {
       userid = context.state.user.id;
-      fetch("http://localhost:3000/users/" + userid + "/cart", {
-          // fetch("http://localhost:3000/users/" + id +"/cart",{
-          // fetch("https://picknpay-apitest.herokuapp.com/register", {
+      // fetch("http://localhost:3000/users/" + id +"/cart",{
+            fetch("https://node-eomp-api.herokuapp.com/users/" + userid + "/cart", {
           method: "POST",
           body: JSON.stringify(id),
           headers: {
