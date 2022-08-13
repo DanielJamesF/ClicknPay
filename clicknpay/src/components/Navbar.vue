@@ -64,6 +64,7 @@ img {
 
 nav {
   right: 0;
+  z-index: 100;
 }
 
 nav a {

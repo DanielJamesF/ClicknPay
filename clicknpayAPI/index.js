@@ -45,8 +45,76 @@ router.get("/", (req, res) => {
 });
 // users functionality
 // ============================================================================================
+//id 
+// router.put("/users/i", (req, res) => {
+// const strid = `SELECT id FROM users`
+
+// db.query(strid, (err, results) => {
+//   if (err) throw err
+//   const result = results
+
+//   result.forEach((e, i) => {
+//     e.id = i +1
+//   });
+//   const strup = `UPDATE users SET id = ? WHERE id = ?`
+  
+//   db.query(strup, [result], (err, results) => {
+//     if (err) throw err
+//     res.json({
+//       msg : "Success"
+//     })
+//     // console.table(results)
+//   })
+
+// })
+// })
+// Get users
+router.get("/users", middleware, (req, res) => {
+  if (req.user.usertype === "Admin") {
+    const strQry = `
+      SELECT *
+      FROM users;
+      `;
+    db.query(strQry, (err, results) => {
+      if (err) throw err;
+      res.json({
+        status: 200,
+        results: results <= 0 ? "Sorry, no product was found." : results,
+        test: req.user.id,
+      });
+    });
+  } else {
+    res.json({
+      msg: "Only Admins are able to view this, Sumimasen",
+    });
+  }
+  // Query
+});
+
+// Get one users
+router.get("/users/:id", (req, res) => {
+  // Query
+  const strQry = `
+    SELECT *
+    FROM users 
+    WHERE id = ?;
+    `;
+
+  db.query(strQry, [req.params.id], (err, results) => {
+    if (err) throw err;
+    res.json(
+      // results
+      {
+        status: 200,
+        results: results,
+        // results: results.length <= 0 ? "Sorry, no product was found." : results,
+      }
+    );
+  });
+});
+
 // User registration
-router.post("/register", bodyParser.json(), async (req, res) => {
+router.post("/users", bodyParser.json(), async (req, res) => {
   try {
     const bd = req.body;
     if (bd.usertype === "" || bd.usertype === null) {
@@ -143,7 +211,7 @@ router.post("/register", bodyParser.json(), async (req, res) => {
 // }
 
 // Login
-router.post("/login", bodyParser.json(), (req, res) => {
+router.patch("/users", bodyParser.json(), (req, res) => {
   try {
     // Get email and password
     const { email, password } = req.body;
@@ -212,66 +280,6 @@ router.post("/login", bodyParser.json(), (req, res) => {
 //   "password":"password"
 // }
 
-// Verify
-router.get("/verify", (req, res) => {
-  const token = req.header("x-auth-token");
-  jwt.verify(token, process.env.jwtSecret, (error, decodedToken) => {
-    if (error) {
-      res.status(401).json({
-        msg: "Unauthorized Access!",
-      });
-    } else {
-      res.status(200);
-      res.send(decodedToken);
-    }
-  });
-});
-
-// Get users
-router.get("/users", middleware, (req, res) => {
-  if (req.user.usertype === "Admin") {
-    const strQry = `
-      SELECT *
-      FROM users;
-      `;
-    db.query(strQry, (err, results) => {
-      if (err) throw err;
-      res.json({
-        status: 200,
-        results: results <= 0 ? "Sorry, no product was found." : results,
-        test: req.user.id,
-      });
-    });
-  } else {
-    res.json({
-      msg: "Only Admins are able to view this, Sumimasen",
-    });
-  }
-  // Query
-});
-
-// Get one users
-router.get("/users/:id", (req, res) => {
-  // Query
-  const strQry = `
-    SELECT *
-    FROM users 
-    WHERE id = ?;
-    `;
-
-  db.query(strQry, [req.params.id], (err, results) => {
-    if (err) throw err;
-    res.json(
-      // results
-      {
-        status: 200,
-        results: results,
-        // results: results.length <= 0 ? "Sorry, no product was found." : results,
-      }
-    );
-  });
-});
-
 // Update users
 router.put("/users/:id", middleware, bodyParser.json(), (req, res) => {
   const { firstname, lastname, email, address, usertype } = req.body;
@@ -316,6 +324,20 @@ router.delete("/users/:id", middleware, (req, res) => {
   }
 });
 
+// Verify
+router.get("/verify", (req, res) => {
+  const token = req.header("x-auth-token");
+  jwt.verify(token, process.env.jwtSecret, (error, decodedToken) => {
+    if (error) {
+      res.status(401).json({
+        msg: "Unauthorized Access!",
+      });
+    } else {
+      res.status(200);
+      res.send(decodedToken);
+    }
+  });
+});
 // ===========================================================================================
 // cart functionalty
 // ===========================================================================================
@@ -376,8 +398,9 @@ router.post("/users/:id/cart", middleware, bodyParser.json(), (req, res) => {
           prodid: results[0].id,
           prodname: results[0].prodname,
           prodimg: results[0].prodimg,
-          quantity: results[0].quantity,
+          category: results[0].category,
           price: results[0].price,
+          stock: results[0].stock,
           totalamount: results[0].totalamount,
           userid: results[0].userid,
         };
@@ -430,6 +453,7 @@ router.delete("/users/:id/cart/:prodid", middleware, (req, res) => {
   });
 });
 
+// delete all cart items
 router.delete("/users/:id/cart", middleware, (req, res) => {
   const dCart = `SELECT cart 
   FROM users
@@ -459,12 +483,12 @@ router.post("/products", middleware, bodyParser.json(), (req, res) => {
   try {
     if (req.user.usertype === "Admin") {
       const bd = req.body;
-      bd.totalamount = bd.quantity * bd.price;
+      bd.totalamount = bd.stock * bd.price;
       // Query
       // id, prodname, prodimg, quantity, price, totalamount, userid
       const strQry = `
-        INSERT INTO products(prodname, prodimg, quantity, price, totalamount, userid)
-        VALUES(?, ?, ?, ?, ?, ?);
+        INSERT INTO products(prodname, prodimg, category, price, stock, totalamount, userid)
+        VALUES(?, ?, ?, ?, ?, ?, ?);
         `;
       //
       db.query(
@@ -472,8 +496,9 @@ router.post("/products", middleware, bodyParser.json(), (req, res) => {
         [
           bd.prodname,
           bd.prodimg,
-          bd.quantity,
+          bd.category,
           bd.price,
+          bd.stock,
           bd.totalamount,
           req.user.id,
         ],
@@ -551,8 +576,9 @@ router.put("/products/:id", middleware, bodyParser.json(), async (req, res) => {
   const product = {
     prodname,
     prodimg,
+    category,
     price,
-    quantity,
+    stock,
   };
   db.query(sql, product, (err) => {
     if (err) throw err;

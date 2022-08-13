@@ -15,7 +15,7 @@
             <router-link :to="{ name: 'product', params: { id: product.id } }">
             <img :src="product.prodimg" class="card-img-top" alt="" />
             </router-link>
-              <!-- <button class="btn btn-primary">Single</button> -->
+              <button class="btn btn-primary">Single</button>
           </div>
         </div>
       </div>
