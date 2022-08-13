@@ -64,7 +64,6 @@ export default {
   position: absolute;
   left: 0;
   top: 100px;
-  z-index: -1;
 }
 #rrow{
   gap: 10px;

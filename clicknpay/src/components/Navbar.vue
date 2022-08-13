@@ -1,6 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
+  <div class="container-fluid">
+    <img src="../assets/logo.png" alt="logo" />
+    <nav class="navbar navbar-expand-lg">
       <button
         class="navbar-toggler navbar-dark"
         type="button"
@@ -21,9 +22,8 @@
         <router-link to="/contact">Contact</router-link>
         <router-link to="/admin">Admin</router-link>
       </div>
-    </div>
-  <img src="../assets/logo.png" alt="" />
-  </nav>
+    </nav>
+  </div>
 </template>
 
 <script>
@@ -31,34 +31,43 @@ export default {};
 </script>
 
 <style scoped>
+  .container-fluid {
+    position: fixed;
+    width: 100%;
+    background-color: black;
+    height: 90px;
+    border-bottom: solid blue 3px;
+    display: flex;
+    justify-content: space-between;
+  }
 img {
-  height: 5.5em;
-  padding: 2px;
-  position: fixed;
-  right: 0;
+  left: 0;
   aspect-ratio: 1;
   border-radius: 50px;
+  height: 5.5em;
+  padding: 2px;
 }
 nav {
-  position: fixed;
-  border-left: solid blue 1px;
-  border-bottom: solid blue 3px;
-  background-color: black;
-  height: 90px;
-  width: 100vw;
+  right: 0;
 }
 nav a {
-  font-weight: bold;
+  /* font-weight: bold; */
   font-size: 17px;
   color: white;
   text-decoration: none;
   padding: 10px;
-
 }
 nav a.router-link-exact-active {
   color: blue;
 }
 nav a:hover {
   color: lightslategrey;
+}
+
+@media (max-width: 992px){
+	img{
+    display: none;
+  }
+  
 }
 </style>

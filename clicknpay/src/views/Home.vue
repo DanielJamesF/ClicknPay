@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div id="row1" class="row">
       <div class="col">
-        <img src="../assets/logo.png" alt="logo" />
+        <img id="go" src="../assets/go.png" alt="go" /><span>F</span><span><img src="../assets/itsani.jpg" alt="I"></span>
         <!-- <router-link to="/loginregister">Click</router-link> -->
         <!-- <span id="n"> 'n </span><span id="pay">Pay</span> -->
       </div>
@@ -27,7 +27,7 @@ export default {
 <style scoped>
 .container-fluid {
   height: 100vh;
-  background-image: url("../assets/wow.gif");
+  /* background-image: url("../assets/wow.gif"); */
   background-color: white;
   background-blend-mode: multiply;
   background-position: center;
@@ -69,7 +69,7 @@ span {
   background-color: white;
   color: blue;
 } */
-img {
+#go {
   aspect-ratio: 1;
   border-radius: 190px;
   border: solid;
