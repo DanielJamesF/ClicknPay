@@ -40,7 +40,7 @@
         placeholder="Leave a message to let us know how we can improve our services &#128512;"
       ></textarea>
       <br />
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="button" class="btn btn-primary">Submit</button>
     </form>
   </div>
 </template>
@@ -54,16 +54,17 @@ export default {};
   min-height: 100vh;
   padding-top: 95px;
   display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-  align-items: center; 
-  background-image: url('../assets/wall.jpg');
-  background-position: center;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../assets/wow.gif');
+  background-blend-mode: multiply;
+  background-color: red;
 }
 #form {
   text-align: center;
   width: 40%;
   background-image: url('../assets/wall.jpg');
+  background-position: center;
   color: white;
 }
 @media (max-width: 992px){

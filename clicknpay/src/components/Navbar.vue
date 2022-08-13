@@ -1,55 +1,55 @@
 <template>
-  <nav class="navbar navbar-dark navbar-expand-md bg-dark sticky-top">
-    <div class="container">
-      <router-link class="navbar-brand text-decoration-none" :to="{name:'home'}">
-        <a class="navbar-brand text-decoration-none">
-          <img 
-            src="../assets/logo.png"
-            width="120px"
-            height="20px"
-            class="d-inline-block align-text-center"
-            alt="logo"
-          />
-          GO Figure</a>
-      </router-link>
+  <div class="container-fluid">
+    <div id="div">
+       <img id="go" src="../assets/go.png" alt="go" />
+       <span class="text-dark">F</span>
+       <span><img src="../assets/ittsreallyani.png" alt="I" /></span>
+       <span class="text-dark">G</span>
+       <span class="text-dark">U</span>
+       <span class="text-dark">R</span>
+       <span class="text-dark">E</span>
+    </div>
+    <!-- <<<<<<< HEAD -->
+    <!-- <nav class="navbar navbar-expand-lg">
       <button
-        class="navbar-toggler"
+        class="navbar-toggler navbar-dark"
         type="button"
         data-bs-toggle="collapse"
-        data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      > -->
+    <!-- ======= -->
+    <nav class="navbar navbar-expand-sm sticky-top">
+      <button
+        class="navbar-toggler navbar-dark"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
+        <!-- >>>>>>> f8886320b4ad771917187286d403242f7e2eee24 -->
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div
-        class="collapse navbar-collapse justify-content-end"
-        id="navbarNavAltMarkup"
-      >
-        <div class="navbar-nav">
-          <div v-if="user" class="d-md-flex">
-            <router-link to="/"><a class="nav-link">Home</a></router-link>
-            <router-link to="/about"><a class="nav-link">About</a></router-link>
-            <router-link to="/products"
-              ><a class="nav-link">Products</a></router-link
-            >
-            <router-link to="/contact"
-              ><a class="nav-link">Contact</a></router-link
-            >
-            <router-link to="/admin"><a class="nav-link">Admin</a></router-link>
-            <router-link to="/users"><a class="nav-link">Users</a></router-link>
-            <router-link to="/cart"><a class="nav-link">Cart</a></router-link>
-            <button class="btn" @click="logout">Logout</button>
-          </div>
-          <div v-else class="d-sm-flex justify-content-center">
-            <router-link :to="{name:'login'}"><a class="nav-link">Login</a></router-link>
-            <router-link :to="{name:'register'}"><a class="nav-link">Register</a></router-link>
-          </div>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <router-link to="/">Home</router-link>
+        <router-link to="/about">About</router-link>
+        <router-link to="/products">Products</router-link>
+        <router-link to="/contact">Contact</router-link>
+        <router-link to="/admin">Admin</router-link>
+        <router-link to="/users">Users</router-link> |
+        <router-link to="/login">Login</router-link>
+        <router-link to="/register">Register</router-link> |
+        <router-link to="/cart">Cart</router-link>
+        <div v-if="user">
+          <button class="btn" @click="logout">Logout</button>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </div>
 </template>
 
 <script>
@@ -72,35 +72,33 @@ export default {
 </script>
 
 <style scoped>
-/* 
 .container-fluid {
   position: fixed;
   width: 100%;
-  background-color: black;
   height: 90px;
   border-bottom: 3px solid blue;
+  background-color: #fff;
   display: flex;
   justify-content: space-between;
+  z-index: 100;
 }
 
 img {
   right: 0;
-  aspect-ratio: 1;
-  border-radius: 50px;
   height: 5.5em;
   padding: 2px;
 }
 
 nav {
   right: 0;
+  z-index: 100;
 }
 
 nav a {
   font-size: 17px;
-  color: white;
+  color: black;
   text-decoration: none;
   padding: 10px;
-
 }
 
 nav a.router-link-exact-active {
@@ -111,9 +109,12 @@ nav a:hover {
   color: lightslategrey;
 }
 
-@media (max-width: 992px){
-  img{
+span{
+  padding: 5px;
+}
+@media (max-width: 992px) {
+  #div {
     display: none;
   }
-} */
+}
 </style>

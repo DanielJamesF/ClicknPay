@@ -1,10 +1,12 @@
 <template>
   <div class="container-fluid text-center">
     <div class="row d-flex justify-content-center align-content-center">
-
-      <form id="login" class="mx-auto bg-white p-5 form rounded-5" @submit.prevent="login">
+      <form
+        id="login"
+        class="form-control mx-auto bg-white p-5"
+        @submit.prevent="login"
+      >
         <h2 style="font-size: 3vw" class="text-light">Login</h2>
-
         <div class="form-group mb-3">
           <input
             type="email"
@@ -13,9 +15,6 @@
             id="email"
             v-model="email"
           />
-          <!-- </div>
-
-        <div class="mb-3"> -->
           <input
             type="password"
             class="form-control my-3"
@@ -24,16 +23,12 @@
             v-model="password"
           />
         </div>
-
         <button type="submit" class="btn btn-dark">Submit</button>
-      
       </form>
-
-     <router-link :to="{ name: 'register' }">
+      <router-link :to="{ name: 'register' }">
         <a style="font-size: 30px" class="nav-link"> Register</a>
       </router-link>
     </div>
-
     <div v-if="user">
       <h2>{{ user.firstname }} Login Successful</h2>
     </div>
@@ -73,10 +68,18 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('../assets/wall.jpg');
+  background-image: url('../assets/wow.gif');
+  background-blend-mode: multiply;
+  background-color: red;
+}
+form {
+  background-image: url("../assets/wall.jpg");
   background-position: center;
 }
-form{
-  background-image: url('../assets/wall.jpg');
+.nav-link a{
+  text-decoration: none;
+  border: solid;
+  color: black;
+
 }
 </style>

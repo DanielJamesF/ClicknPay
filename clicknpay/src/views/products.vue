@@ -1,36 +1,21 @@
 <template>
-  <section id="products" class="p-3">
-    <div class="container">
-      <div v-if="user">
-        <h2 id="welcome">Welcome {{ user.firstname }}</h2>
-      </div>
-      <div v-if="products">
-      <div class="container">
-        <div class="row mx-auto">
-          <div
-            v-for="product in products"
-            :key="product"
-            class="card mx-auto m-3 p-1"
-            style="width: 20rem"
-          >
-          <div class="my-auto">
-            <img :src="product.prodimg" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h5 class="card-title">{{ product.prodname }}</h5>
-              <p class="card-text">Price: R{{ product.price }}.00</p>
-              <router-link
-                :to="{ name: 'product', params: { id: product.id } }"
-              >
-                <a href="#" class="btn btn-primary">View Item</a>
-              </router-link>
-            </div>
-          </div>
+  <div class="container-fluid">
+    <div v-if="user">
+      <h2 id="welcome">Welcome {{ user.firstname }}</h2>
+    </div>
+    <div id="products" v-if="products">
+        <div id="row" class="row mx-auto">
+          <div v-for="product in products" :key="product" class="card p-3 m-auto" style="width: 18rem; height: 450px">
+            <h2 id="name">{{ product.prodname }}</h2>
+            <router-link :to="{ name: 'product', params: { id: product.id } }">
+            <img :src="product.prodimg" class="card-img-top" alt="" />
+            </router-link>
           </div>
         </div>
       </div>
+              <!-- <button class="btn btn-primary">Single</button> -->
     </div>
-    </div>
-  </section>
+
 </template>
 
 <script>
@@ -40,7 +25,6 @@ export default {
   },
   computed: {
     products() {
-      // console.log(this.$store.state.products)
       return this.$store.state.products;
     },
     user() {
@@ -51,33 +35,36 @@ export default {
 </script>
 
 <style scoped>
-#products {
+.container-fluid {
   min-height: 100vh;
+  padding-top: 100px;
+  padding-bottom: 10px;
+  background-image: url('../assets/wow.gif');
+  background-blend-mode: multiply;
+  background-color: red;
+  /* display: flex;
+  justify-content: center; */
 }
 
-.card img{
+/* #products {
 
-}
-/* .container-fluid {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+} */
 
-#products {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 100px;
-  z-index: -1;
-}
-
-#rrow {
+#row {
   gap: 20px;
 }
-a:hover{
+/* a:hover{
   cursor: pointer;
 } */
+#name{
+  /* border: solid; */
+  height: 45px;
+  font-size: 15px;
+  text-align: center;
+}
+.card-img-top{
+  /* border: solid; */
+  aspect-ratio: 1;
+  height: 300px;
+}
 </style>
