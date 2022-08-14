@@ -1,4 +1,5 @@
 <template>
+<section id="loginPage">
   <div class="container-fluid text-center">
     <div class="row d-flex justify-content-center align-content-center">
       <form
@@ -33,6 +34,7 @@
       <h2>{{ user.firstname }} Login Successful</h2>
     </div>
   </div>
+  </section>
 </template>
 
 <script>
@@ -63,15 +65,17 @@ export default {
 </script>
 
 <style scoped>
+#loginPage{
+  background-image: url('../assets/wow.gif');
+}
 .container-fluid {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('../assets/wow.gif');
-  background-blend-mode: multiply;
-  background-color: red;
+  background-blend-mode: multiply; 
 }
+
 form {
   background-image: url("../assets/wall.jpg");
   background-position: center;
@@ -80,6 +84,5 @@ form {
   text-decoration: none;
   border: solid;
   color: black;
-
 }
 </style>

@@ -49,10 +49,10 @@ export default {};
 
 <style scoped>
 .container-fluid {
-  position: sticky;
+  /* position: sticky; */
   background-color: #fff;
   border-top: solid black 1px;
-  z-index: 100;
+  /* z-index: 100; */
 }
 a {
   text-decoration: none;

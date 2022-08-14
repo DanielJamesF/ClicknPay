@@ -14,8 +14,10 @@ export default createStore({
     //   firstname: "Boi"
     // },
     user: null,
+    admin : false,
     users: null,
     cart: null,
+    asc: true
   },
   getters: {},
   mutations: {
@@ -32,7 +34,7 @@ export default createStore({
     setcart: (state, cart) => {
       let newCart = JSON.parse(cart);
       state.cart = newCart;
-      // console.table(newCart)
+      // console.table(newCart.length)
     },
     setusers: (state, users) => {
       state.users = users;
@@ -118,7 +120,7 @@ export default createStore({
     },
 
     // adds user to db
-    register: async (context, payload) => {
+    register: async (context, payload) => { 
       const {
         firstname,
         lastname,
@@ -191,9 +193,13 @@ export default createStore({
           context.commit("setuser", user);
           context.commit("setToken", token);
           context.commit("setcart", cart);
-          // router.push({
-          //   name: "products"
-          // })
+          if (user.usertype === "Admin") {
+            context.state.admin = true 
+          }
+          console.log(context.state.admin)
+          router.push({
+            name: "products"
+          })
         });
     },
 
@@ -251,7 +257,7 @@ export default createStore({
         });
     },
 
-    // Cart stuffs
+    // get cart
     getCart: async (context, id) => {
       id = context.state.user.id;
       // fetch("http://localhost:3000/users/" + id + "/cart", {
@@ -264,13 +270,34 @@ export default createStore({
         })
         .then((res) => res.json())
         .then((data) => {
-          alert(data.msg)
-          console.log(data);
+          // alert(data.msg)
+          // console.log(data);
           let cart = JSON.stringify(data);
           context.commit("setcart", cart);
         });
     },
 
+    //delete one cart item
+    removeOne: async (context, id, userid) => {
+      userid = context.state.user.id
+      fetch("https://node-eomp-api.herokuapp.com/users/" + userid + "/cart/" + id, {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            "x-auth-token": context.state.token,
+          },
+        })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data)
+          console.log(id)
+          alert(data.msg)
+          context.state.cart = null
+          context.dispatch("getCart")
+        })
+    },
+
+    // delete all cart items
     deleteCart: async (context, userid) => {
       userid = context.state.user.id
       fetch("https://node-eomp-api.herokuapp.com/users/" + userid + "/cart", {
@@ -284,29 +311,33 @@ export default createStore({
         .then((data) => {
           alert(data.msg)
           context.dispatch("getCart")
-          context.state.cart = null
+          // context.state.cart = null
 
         })
     },
 
     addToCart: async (context, id, userid) => {
-      userid = context.state.user.id;
-      // fetch("http://localhost:3000/users/" + id +"/cart",{
-            fetch("https://node-eomp-api.herokuapp.com/users/" + userid + "/cart", {
-          method: "POST",
-          body: JSON.stringify(id),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            "x-auth-token": context.state.token,
-          },
-        })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          console.log(id);
-          alert(data.msg);
-          context.dispatch("getCart");
-        });
+      if (context.state.user === null) {
+        alert("Please login")
+      } else {
+        userid = context.state.user.id;
+        // fetch("http://localhost:3000/users/" + id +"/cart",{
+        fetch("https://node-eomp-api.herokuapp.com/users/" + userid + "/cart", {
+            method: "POST",
+            body: JSON.stringify(id),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+              "x-auth-token": context.state.token,
+            },
+          })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            console.log(id);
+            alert(data.msg);
+            context.dispatch("getCart");
+          });
+      }
     },
   },
   modules: {},

@@ -1,29 +1,22 @@
 <template>
-  <div class="container-fluid">
-    <div id="div">
-       <img id="go" src="../assets/go.png" alt="go" />
-       <span class="text-dark">F</span>
-       <span><img src="../assets/ittsreallyani.png" alt="I" /></span>
-       <span class="text-dark">G</span>
-       <span class="text-dark">U</span>
-       <span class="text-dark">R</span>
-       <span class="text-dark">E</span>
-    </div>
-    <!-- <<<<<<< HEAD -->
-    <!-- <nav class="navbar navbar-expand-lg">
+  <nav
+    class="navbar navbar-expand-md sticky-top"
+    style="background-color: #e3f2fd"
+  >
+    <div class="container-fluid">
+      <div id="div" class="nav-item">
+        <router-link :to="{ name: 'home' }">
+          <img id="go" src="../assets/go.png" alt="go" />
+          <span class="text-dark">F</span>
+          <span><img src="../assets/ittsreallyani.png" alt="I" /></span>
+          <span class="text-dark">G</span>
+          <span class="text-dark">U</span>
+          <span class="text-dark">R</span>
+          <span class="text-dark">E</span>
+        </router-link>
+      </div>
       <button
-        class="navbar-toggler navbar-dark"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      > -->
-    <!-- ======= -->
-    <nav class="navbar navbar-expand-sm sticky-top">
-      <button
-        class="navbar-toggler navbar-dark"
+        class="navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#navbarNav"
@@ -31,33 +24,87 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <!-- >>>>>>> f8886320b4ad771917187286d403242f7e2eee24 -->
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <router-link to="/">Home</router-link>
-        <router-link to="/about">About</router-link>
-        <router-link to="/products">Products</router-link>
-        <router-link to="/contact">Contact</router-link>
-        <router-link to="/admin">Admin</router-link>
-        <router-link to="/users">Users</router-link> |
-        <router-link to="/login">Login</router-link>
-        <router-link to="/register">Register</router-link> |
-        <router-link to="/cart">Cart</router-link>
-        <div v-if="user">
-          <button class="btn" @click="logout">Logout</button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <div class="navbar-nav">
+          <div v-if="user" class="d-md-flex">
+            <router-link to="/">
+              <a class="nav-link">Home</a>
+            </router-link>
+            <router-link to="/about">
+              <a class="nav-link">About</a>
+            </router-link>
+            <router-link to="/products">
+              <a class="nav-link">Products</a>
+            </router-link>
+            <router-link to="/contact">
+              <a class="nav-link">Contact</a>
+            </router-link>
+
+            <router-link to="/cart">
+              <button class="btn rounded-pill">
+                <i class="fs-4 fa-solid fa-cart-shopping"><span>{{num}}</span></i>
+                <!-- <p class="text-black">{{num}}</p> -->
+              </button>
+              <!-- <a class="nav-link">Cart</a> -->
+            </router-link>
+          </div>
+
+          <div v-if="admin" class="d-md-flex">
+            <router-link to="/admin">
+              <a class="nav-link">Admin</a>
+            </router-link>
+            <router-link to="/users">
+              <a class="nav-link">Users</a>
+            </router-link>
+          </div>
+
+          <div v-if="user">
+            <button class="btn" @click="logout">Logout</button>
+          </div>
+
+          <div v-else class="d-md-flex">
+            <router-link to="/login">
+              <a class="nav-link">Login</a>
+            </router-link>
+            <router-link to="/register">
+              <a class="nav-link">Register</a>
+            </router-link>
+          </div>
         </div>
       </div>
-    </nav>
-  </div>
+    </div>
+  </nav>
 </template>
 
 <script>
 export default {
-  mounted() {},
+  data() {
+    return {
+      
+    }
+  },
+  mounted() {
+
+},
   computed: {
     user() {
       return this.$store.state.user;
+    },
+    admin() {
+      return this.$store.state.admin;
+    },
+    num: function() {
+    let Cnum = this.$store.state.cart;
+    if ((Cnum === null) || (Cnum === undefined)){
+      Cnum = 0;
+      return Cnum;
+    } else {
+      // Cnum.length
+      let i = Cnum.length
+      return i;
+    }
     },
   },
   methods: {
@@ -65,14 +112,19 @@ export default {
       this.$store.state.user = null;
       this.$store.state.cart = null;
       this.$store.state.token = null;
-      document.getElementById("login").reset();
+      this.$store.state.admin = false;
     },
   },
 };
 </script>
 
 <style scoped>
-.container-fluid {
+img {
+  right: 0;
+  height: 5em;
+  padding: 2px;
+}
+/* .container-fluid {
   position: fixed;
   width: 100%;
   height: 90px;
@@ -83,11 +135,6 @@ export default {
   z-index: 100;
 }
 
-img {
-  right: 0;
-  height: 5.5em;
-  padding: 2px;
-}
 
 nav {
   right: 0;
@@ -116,5 +163,5 @@ span{
   #div {
     display: none;
   }
-}
+} */
 </style>
