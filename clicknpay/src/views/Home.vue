@@ -1,14 +1,8 @@
 <template>
   <div class="container-fluid">
-    <div id="row1" class="row">
-      <div id="logo" class="col ">
-        <img id="go" src="../assets/go.png" alt="go" />
-        <span>F</span>
-        <span><img src="../assets/ittsreallyani.png" alt="I" /></span
-        ><span>G</span>
-        <span>U</span>
-        <span>R</span>
-        <span>E</span>
+    <div class="row">
+      <div id="logo" class="col flex-wrap">
+        <img id="go" class="img-fluid" src="../assets/go.png" alt="go" /><span>F</span><span><img class="img-fluid" id="I" src="../assets/ittsreallyani.png" alt="I" /></span><span>G</span><span>U</span><span>R</span><span>E</span>
       </div>
       <div id="loginregister" class="row">
           <div class="col">
@@ -32,14 +26,11 @@ export default {
 .container-fluid {
   height: 100vh;
   background-image: url("../assets/wow.gif");
-  background-color: white;
-  background-blend-mode: multiply;
   background-position: center;
   object-fit: cover;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: auto;
 }
 span {
   font-size: 60px;
@@ -84,5 +75,36 @@ span {
 }
 #loginregister{
   padding: 10px;
+}
+@media (min-width: 775px) and (max-width: 886px) {
+  span{
+    font-size: unset;
+  }
+}
+@media (min-width: 369px) and (max-width: 775px){
+  #go{
+    height: 50px;
+    padding: 10px;
+  }
+  #I{
+    height: 30px;
+  }
+  span{
+    font-size: unset;
+    padding: 0;
+  }
+}
+@media (max-width: 369px) {
+  #go{
+    height: 30px;
+    padding: 5px;
+  }
+  #I{
+    height: 20px;
+  }
+  span{
+    font-size: unset;
+    padding: 5px;
+  }
 }
 </style>

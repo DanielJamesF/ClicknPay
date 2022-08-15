@@ -6,9 +6,9 @@
     <div class="container-fluid">
       <div id="div" class="nav-item">
         <router-link :to="{ name: 'home' }">
-          <img id="go" src="../assets/go.png" alt="go" />
-          <span class="text-dark">F</span>
-          <span><img src="../assets/ittsreallyani.png" alt="I" /></span>
+          <img class="img-fluid" id="go" src="../assets/go.png" alt="go" />
+          <span class="text-dark text-decoration-none">F</span>
+          <span><img id="I" src="../assets/ittsreallyani.png" alt="I" /></span>
           <span class="text-dark">G</span>
           <span class="text-dark">U</span>
           <span class="text-dark">R</span>
@@ -124,44 +124,21 @@ img {
   height: 5em;
   padding: 2px;
 }
-/* .container-fluid {
-  position: fixed;
-  width: 100%;
-  height: 90px;
-  border-bottom: 3px solid blue;
-  background-color: #fff;
-  display: flex;
-  justify-content: space-between;
-  z-index: 100;
+#div span{
+  padding: 3px;
 }
+@media (max-width: 365px) {
+  #go{
+    height: 15px;
+  }
+  #I{
 
-
-nav {
-  right: 0;
-  z-index: 100;
+    height: 25px;
+  }
 }
-
-nav a {
-  font-size: 17px;
-  color: black;
-  text-decoration: none;
-  padding: 10px;
-}
-
-nav a.router-link-exact-active {
-  color: blue;
-}
-
-nav a:hover {
-  color: lightslategrey;
-}
-
-span{
-  padding: 5px;
-}
-@media (max-width: 992px) {
+@media (max-width: 212px) {
   #div {
     display: none;
   }
-} */
+}
 </style>

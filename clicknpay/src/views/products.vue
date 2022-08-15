@@ -1,7 +1,7 @@
 <template>
   <section id="products" class="p-5">
     <div class="container-fluid">
-      <div class="row p-3 mx-auto">
+      <div id="bars" class="row p-3 mx-auto">
         <div class="col-md-3 mx-auto">
           <input
             type="text"
@@ -40,8 +40,8 @@
           <div
             v-for="product in products"
             :key="product"
-            class="card p-3 m-auto"
-            style="width: 18rem; height: 450px"
+            class="card m-auto"
+            style="width: 18rem; height: 400px"
           >
             <div class="my-auto">
               <router-link
@@ -111,34 +111,25 @@ export default {
 <style scoped>
 #products {
   background-image: url("../assets/wow.gif");
+  background-blend-mode: multiply;
+  background-color: red;
   min-height: 100vh;
 }
-
-.container-fluid {
-  background-blend-mode: multiply;
-  /* display: flex;
-  justify-content: center; */
-}
-
-/* #products {
-
-} */
 
 #row {
   gap: 20px;
 }
-/* a:hover{
-  cursor: pointer;
-} */
+
 #name {
-  /* border: solid; */
-  /* height: 45px;
-  font-size: 15px; */
   text-align: center;
 }
+
 .card-img-top {
-  /* border: solid; */
   aspect-ratio: 1;
-  height: 300px;
+}
+@media (max-width: 425px) {
+  #row{
+    margin: 1px;
+  }
 }
 </style>

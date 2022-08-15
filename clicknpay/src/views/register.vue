@@ -1,8 +1,8 @@
 <template>
   <div class="container-fluid text-center">
-    <div class="row h-75 d-flex justify-content-center align-content-center">
+    <div class="row d-flex justify-content-center align-content-center">
       <form id="register"
-        class="form-control w-50 mx-auto p-5 text-black"
+        class="form-control mx-auto p-5 text-black"
         @submit.prevent="register"
       >
         <h2 style="font-size: 3vw" class="text-light">Register</h2>
@@ -12,7 +12,7 @@
           <input
             id="name"
             v-model="name"
-            class="form-control"
+            class="form-control my-3"
             type="text"
             placeholder="Enter Name"
             required
@@ -23,7 +23,7 @@
           <input
             id="lastname"
             v-model="lastname"
-            class="form-control"
+            class="form-control my-3"
             type="text"
             placeholder="Enter Lastname"
             required
@@ -34,7 +34,7 @@
           <input
             id="email"
             v-model="email"
-            class="form-control"
+            class="form-control my-3"
             type="email"
             placeholder="Enter Email Address"
             required
@@ -45,8 +45,9 @@
           <input
             id="contact"
             v-model="contact"
-            class="form-control"
+            class="form-control my-3"
             type="text"
+            minlength="10"
             placeholder="Add Contact Number"
             required
           />
@@ -56,7 +57,7 @@
           <input
             id="address"
             v-model="address"
-            class="form-control"
+            class="form-control my-3"
             type="text"
             placeholder="Enter Address"
             required
@@ -67,7 +68,7 @@
           <input
             id="password"
             v-model="password"
-            class="form-control"
+            class="form-control my-3"
             type="password"
             maxlength="15"
             placeholder="Choose password"
@@ -119,10 +120,7 @@ export default {
 
 <style scoped>
 .container-fluid {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    min-height: 100vh;
     background-image: url('../assets/wow.gif');
     background-blend-mode: multiply;
     background-color: red;

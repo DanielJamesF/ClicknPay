@@ -37,7 +37,7 @@
         id="message"
         cols="30"
         rows="2"
-        placeholder="Leave a message to let us know how we can improve our services &#128512;"
+        placeholder="Leave a message &#128512;"
       ></textarea>
       <br />
       <button type="button" class="btn btn-primary">Submit</button>
@@ -67,9 +67,9 @@ export default {};
   background-position: center;
   color: white;
 }
-@media (max-width: 992px){
+@media (max-width: 475px){
   #form{
-    width:50%;
+    width: 100%;
   }
 }
 </style>

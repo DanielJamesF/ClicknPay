@@ -8,7 +8,7 @@
             v-for="item in cart"
             :key="item"
             :item="item"
-            class="card m-3 p-3"
+            class="card m-3 p-3 "
             style="width: 18rem; height: fit-content"
           >
             <h2>{{ item.prodname }}</h2>
@@ -55,4 +55,8 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
+img{
+  aspect-ratio: 1;
+} 
 </style>
