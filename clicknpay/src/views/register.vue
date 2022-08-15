@@ -124,9 +124,16 @@ export default {
     background-image: url('../assets/wow.gif');
     background-blend-mode: multiply;
     background-color: red;
+    padding-top: 95px;
 }
 form{
   background-image: url('../assets/wall.jpg');
   background-position: center;
+  width: 70%;
+}
+@media (max-width: 426px) {
+  form{
+    width: 100%;
+  }
 }
 </style>

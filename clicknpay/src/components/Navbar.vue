@@ -129,14 +129,14 @@ img {
 }
 @media (max-width: 365px) {
   #go{
-    height: 15px;
+    height: 20px;
   }
   #I{
 
-    height: 25px;
+    height: 30px;
   }
 }
-@media (max-width: 212px) {
+@media (max-width: 224px) {
   #div {
     display: none;
   }
