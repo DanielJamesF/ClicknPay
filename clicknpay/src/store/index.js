@@ -65,8 +65,9 @@ export default createStore({
       const {
         prodname,
         prodimg,
-        quantity,
-        price
+        category,
+        stock,
+        price,
       } = payload;
       // fetch("http://localhost:3000/products", {
       fetch("https://node-eomp-api.herokuapp.com/products", {
@@ -74,7 +75,8 @@ export default createStore({
           body: JSON.stringify({
             prodname: prodname,
             prodimg: prodimg,
-            quantity: quantity,
+            category: category,
+            stock: stock,
             price: price,
           }),
           headers: {
