@@ -91,10 +91,6 @@ export default {
 th {
   color: red;
 }
-/* td {
-  color: white;
-} */
-
 i {
   color: red;
 }
