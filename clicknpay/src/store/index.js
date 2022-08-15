@@ -167,6 +167,7 @@ export default createStore({
         });
     },
 
+    // logs user in
     login: async (context, payload) => {
       const {
         email,
@@ -186,20 +187,24 @@ export default createStore({
         })
         .then((response) => response.json())
         .then((data) => {
-          alert(data.msg);
-          let user = data.user;
-          let token = data.token;
-          let cart = data.user.cart;
-          context.commit("setuser", user);
-          context.commit("setToken", token);
-          context.commit("setcart", cart);
-          if (user.usertype === "Admin") {
-            context.state.admin = true 
+          if (data.msg === "Login Successful") {
+            alert(data.msg);
+            let user = data.user;
+            let token = data.token;
+            let cart = data.user.cart;
+            context.commit("setuser", user);
+            context.commit("setToken", token);
+            context.commit("setcart", cart);
+            if (user.usertype === "Admin") {
+              context.state.admin = true 
+            }
+            console.log(context.state.admin)
+            router.push({
+              name: "products"
+            })
+          } else {
+            alert(data.msg)
           }
-          console.log(context.state.admin)
-          router.push({
-            name: "products"
-          })
         });
     },
 
