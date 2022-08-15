@@ -1,12 +1,28 @@
 <template>
-  <div class="container-fluid" v-if="product">
-    <div>
-      <router-link to="/products">return</router-link>
+  <section id="single" class="p-5">
+    <div class="container" v-if="product">
+      <div class="row mx-auto">
+        <div class="text-start">
+        <router-link to="/products">
+        <button v-bind:onclick="back" class="btn btn-warning">back</button>   
+        </router-link>
+      </div>
+        <div class="col-md-6 mx-auto">
+          <img :src="product[0].prodimg" class="mx-auto img-fluid" alt="" />
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-around text-start">
+          <h2>{{ product[0].prodname }}</h2>
+          <h2 >{{ product[0].category }}</h2>
+          <h2 class="fw-bolder">Price: R{{ product[0].price }}.00</h2>
+          <h2>{{ product[0].stock }}</h2>
+          <button @click="add" class="btn btn-warning fs-3 text-black w-100">Add to cart</button>
+        </div>
+      </div>
     </div>
-    <h2>{{ product[0].prodname }}</h2>
-    <img :src="product[0].prodimg" alt="" />
-    <button @click="add">add to cart</button>
-  </div>
+    <div v-else>
+      <h2>Loading ...</h2>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -14,7 +30,7 @@ export default {
   props: ["id"],
   data() {
     return {
-      id: this.id,
+      // id: this.id,
     };
   },
 
@@ -33,21 +49,20 @@ export default {
     add() {
       this.$store.dispatch("addToCart", {
         id: this.id,
-        //                 prodid: this.product.id,
-        //                 prodname: this.product,
-        // prodimg: this.product,
-        //                 quantity: this.product,
-        //                 price: this.product,
-        //                 totalamount: this.product,
-        //                 userid: this.product,
       });
+    },
+    back() {
+      this.$store.state.product = null;
     },
   },
 };
 </script>
 
 <style scoped>
-.container-fluid {
+#single {
+  min-height: fit-content;
+}
+/* .container-fluid {
   height: 68.5vh;
   padding-top: 100px;
 }
@@ -60,5 +75,5 @@ a {
   color: black;
   padding: 5px;
   background-color: lightgrey;
-}
+} */
 </style>

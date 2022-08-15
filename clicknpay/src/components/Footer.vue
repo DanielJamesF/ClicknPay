@@ -2,6 +2,17 @@
   <div class="container-fluid">
     <br>
     <div class="row">
+      <!-- <div class="col">
+        <h1>About</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit
+          suscipit in fuga eum nesciunt. Tempore deserunt, qui repellat quas
+          delectus ipsa sequi repellendus voluptatem quis, fugit, aliquid harum
+          modi dolore.
+        </p>
+      </div>
+      <br>
+      <div class="row"> -->
         <div id="links2" class="col">
             <h1>Social links</h1>
             <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>
@@ -38,10 +49,10 @@ export default {};
 
 <style scoped>
 .container-fluid {
-  position: sticky;
+  /* position: sticky; */
   background-color: #fff;
   border-top: solid black 1px;
-  z-index: 100;
+  /* z-index: 100; */
 }
 a {
   text-decoration: none;

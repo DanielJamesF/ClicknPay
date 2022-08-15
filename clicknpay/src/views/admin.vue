@@ -1,4 +1,5 @@
 <template>
+<section id="admin" class="p-5" v-if="admin">
   <div v-if="user">
     <div v-if="products">
       <div class="container text-center">
@@ -49,12 +50,21 @@
     </div>
   </div>
 
-  <div id="else" v-else class="text-center">
-    <h1>Please Login to view Data</h1>
-  </div>
   <!--  -->
   <CreateModal />
   <!--  -->
+</section>
+  <div id="else" v-else class="text-center d-flex flex-column">
+    <h1>
+      Uhm... This is awkward, Only Admins are supposed to be here... but idk
+      <!-- <i class="fa-regular fa-face-thinking"></i> -->
+      <i class="fa-regular fa-face-meh"></i>
+      <i class="fa-regular fa-face-grin-beam-sweat"></i>
+    </h1>
+
+    <router-link :to="{name: 'home'}" class="btn btn-warning p-3 nav-link">
+    <h2>Begone Th...</h2></router-link>
+  </div>
 </template>
 
 <script>
@@ -74,13 +84,16 @@ export default {
     user() {
       return this.$store.state.user;
     },
+    admin() {
+      return this.$store.state.admin;
+    },
   },
 };
 </script>
 
 <style scoped>
 .container {
-  height: 100vh;
+  min-height: 100vh;
 }
 #else {
   height: 100vh;
@@ -89,9 +102,9 @@ export default {
   align-items: center;
 }
 th {
-  color: red;
+  color: black;
 }
 i {
-  color: red;
+  color: black;
 }
 </style>
