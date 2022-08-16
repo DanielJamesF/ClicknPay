@@ -2,32 +2,22 @@
   <section id="cart">
       <div v-if="cart" class="p-4 m-3">
         <div class="row mx-auto">
-<!-- <<<<<<< HEAD -->
-          <button class="btn btn-warning" @click="removeAll"><span> Remove all</span></button>
-          <div class="col-md-9">
-            <div v-for="item in cart" :key="item" :item="item" class="card m-3 p-3"
-              style="width: 18rem; height: fit-content">
-              <h2>{{ item.prodname }}</h2>
-              <img :src="item.prodimg" alt="" />
-              <h2>{{ item.prodid }}</h2>
-              <button class="btn btn-warning" @click="$store.dispatch('removeOne', item.prodid)"><span> Delete</span></button>
-<!-- =======
           <button class="btn btn-warning" @click="removeAll">Remove all</button>
           <div class="col-md-7">
-            <div v-for="item in cart" :key="item" :item="item" class="card m-3 p-3 shadow"
+            <div v-for="item in cart" :key="item" :item="item" class="card m-3 p-3 mx-auto shadow"
               style="width: fit-content; height: fit-content">
               <div class="row">
                 <div class="col-md-3">
                   <img :src="item.prodimg" class="img-fluid" />
                 </div>
-                <div class="col-md-9 d-flex justify-content-space-between">
-                  <h4 class="text-center"
-                  >{{ item.prodname }}</h4>
-                  <button id="delete" class="btn btn-warning" @click="$store.dispatch('removeOne', item.prodid)">Delete</button>
+                <div class="col-md-9 my-auto">
+                  <h4 class="text-start d-lg-flex justify-content-between">
+                     <span>{{ item.prodname }}</span> <span class="fw-bolder">R{{ item.price }}.00</span>
+                  </h4>
+                  
+                  <button id="delete" class="btn btn-warning float-sm-end" @click="$store.dispatch('removeOne', item.prodid)">Delete Item</button>
                 </div>
-              </div> -->
-              <!-- <h2>{{ item.prodid }}</h2> -->
-<!-- >>>>>>> bfa3f2806d495dea1451ee8b955f5d00d8e852f7 -->
+              </div> 
             </div>
           </div>
           <div class="col-md-5">
@@ -40,7 +30,7 @@
                       <p><span class="">{{ item.prodname }}</span></p>
                     </div>
                     <div class="col-md-5">
-                      <p><span>R{{ item.price }}</span></p>
+                      <p><span>R{{ item.price }}.00</span></p>
                     </div>
                   </div>
                 <p id="total"><span class="fw-bolder">Total:</span>( <span>{{ num }} item</span> ) <span>R{{ total }}.00</span></p>
@@ -68,7 +58,6 @@ export default {
     total() {
       let prices = this.$store.state.cart
       let sum = prices.reduce((x, cart) => {
-        // return console.log(x)
         return x + cart.price
       }, 0)
       return sum
@@ -79,7 +68,6 @@ export default {
       Cnum = 0;
       return Cnum;
     } else {
-      // Cnum.length
       let i = Cnum.length
       return i;
     }
@@ -117,15 +105,14 @@ img{
   border-top: solid 1px black;
   border-bottom: solid 1px black;
 }
-/* 
-<<<<<<< HEAD
-@media (max-width: 300px){
+
+/* @media (max-width: 300px){
   .card{
 
   }
-=======
+
 #delete{
     align-self: end;
->>>>>>> bfa3f2806d495dea1451ee8b955f5d00d8e852f7
 } */
+/* } */
 </style>
