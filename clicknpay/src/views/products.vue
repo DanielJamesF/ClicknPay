@@ -40,8 +40,8 @@
           <div
             v-for="product in products"
             :key="product"
-            class="card m-auto"
-            style="width: 18rem; height: 400px"
+            class="card p-3 m-auto"
+            style="width: 18rem; height: fit-content"
           >
             <div class="my-auto">
               <router-link
@@ -129,6 +129,7 @@ export default {
 }
 .card-img-top {
   aspect-ratio: 1;
+/* <<<<<<< HEAD */
   background-color: white;
 }
 .card:hover{
@@ -141,5 +142,7 @@ export default {
   #row{
     margin: 1px;
   }
+/* =======
+>>>>>>> bfa3f2806d495dea1451ee8b955f5d00d8e852f7 */
 }
 </style>

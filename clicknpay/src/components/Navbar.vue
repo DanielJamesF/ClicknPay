@@ -33,9 +33,9 @@
             <router-link to="/">
               <a class="nav-link">Home</a>
             </router-link>
-            <router-link to="/about">
+            <!-- <router-link to="/about">
               <a class="nav-link">About</a>
-            </router-link>
+            </router-link> -->
             <router-link to="/products">
               <a class="nav-link">Products</a>
             </router-link>
@@ -125,6 +125,7 @@ img {
   height: 5em;
   padding: 2px;
 }
+
 #div span{
   padding: 3px;
 }
@@ -141,5 +142,19 @@ img {
   #div {
     display: none;
   }
+}
+
+nav a {
+  font-size: 17px;
+  color: black;
+  text-decoration: none;
+}
+
+nav a.router-link-exact-active {
+  color: blue;
+}
+
+nav a:hover {
+  color: lightslategrey;
 }
 </style>

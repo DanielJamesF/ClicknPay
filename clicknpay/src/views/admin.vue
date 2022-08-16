@@ -4,7 +4,7 @@
     <div v-if="products">
       <div class="container text-center">
         <h2 class="text-black">User: {{ user.firstname }}</h2>
-        <table class="table">
+        <table class="table ">
           <thead>
             <tr>
               <th scope="col">ID</th>
