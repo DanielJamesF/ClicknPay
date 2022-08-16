@@ -75,7 +75,7 @@
             required
           />
         </div>
-        <button type="submit" class="btn btn-dark">Register</button>
+        <button type="submit"><span> Register</span></button>
       </form>
     </div>
   </div>

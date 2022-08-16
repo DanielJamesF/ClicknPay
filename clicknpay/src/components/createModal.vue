@@ -15,7 +15,7 @@
             class="btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
-          ></button>
+          ><span></span></button>
         </div>
         <div class="modal-body">
           <div class="row">
@@ -101,8 +101,10 @@
             class="btn btn-primary"
             data-bs-dismiss="modal"
             @click="add"
-          >
+          ><span>
+
             Add Product
+          </span>
           </button>
         </div>
       </div>

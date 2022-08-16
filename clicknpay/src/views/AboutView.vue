@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <h1>About Us</h1>
-    <div class="row">
+    <!-- <div class="row">
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, rem. Delectus perspiciatis soluta esse saepe, vitae modi autem. Dolorum magni unde ut excepturi odit optio id, quod dolor natus perspiciatis?</p>
       <div class="row">
         <h2>What do we provide?</h2>
@@ -18,7 +18,7 @@
         <img src="" alt="Daniel">
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum maxime, eum quam dolorum similique ea repellat reiciendis deleniti quisquam distinctio expedita non mollitia facilis quia voluptas soluta. Libero, nesciunt deleniti.</p>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

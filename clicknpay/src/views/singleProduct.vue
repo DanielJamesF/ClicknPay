@@ -4,7 +4,7 @@
       <div class="row mx-auto">
         <div class="text-start">
         <router-link to="/products">
-        <button v-bind:onclick="back" class="btn btn-warning">back</button>   
+        <button v-bind:onclick="back"><span> back</span></button>   
         </router-link>
       </div>
         <div class="col-md-6 mx-auto">
@@ -15,7 +15,7 @@
           <h2 >{{ product[0].category }}</h2>
           <h2 class="fw-bolder">Price: R{{ product[0].price }}.00</h2>
           <h2>{{ product[0].stock }}</h2>
-          <button @click="add" class="btn btn-warning fs-3 text-black w-100">Add to cart</button>
+          <button @click="add"><span> Add to cart</span></button>
         </div>
       </div>
     </div>
@@ -62,18 +62,4 @@ export default {
 #single {
   min-height: fit-content;
 }
-/* .container-fluid {
-  height: 68.5vh;
-  padding-top: 100px;
-}
-img {
-  height: 550px;
-}
-a {
-  border: solid 1px;
-  text-decoration: none;
-  color: black;
-  padding: 5px;
-  background-color: lightgrey;
-} */
 </style>

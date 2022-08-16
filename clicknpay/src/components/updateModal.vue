@@ -15,7 +15,7 @@
             class="btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
-          ></button>
+          ><span></span></button>
         </div>
         <div class="modal-body">
           <div class="row">
@@ -91,16 +91,15 @@
               type="button"
               class="btn btn-secondary"
               data-bs-dismiss="modal"
-            >
-              Close
+            ><span>Close</span>
+              
             </button>
             <button
               type="button"
               class="btn btn-primary"
               data-bs-dismiss="modal"
               @click="update"
-            >
-              Update
+            ><span>Update</span>
             </button>
           </div>
         </div>

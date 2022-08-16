@@ -123,10 +123,20 @@ export default {
 #name {
   text-align: center;
 }
-
+.card{
+  background-color: transparent;
+  color: grey;
+}
 .card-img-top {
   aspect-ratio: 1;
+  background-color: white;
 }
+.card:hover{
+  background-color: black;
+  color: white;
+  border: solid 1px white;
+}
+
 @media (max-width: 425px) {
   #row{
     margin: 1px;

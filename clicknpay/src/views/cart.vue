@@ -1,16 +1,15 @@
 <template>
   <section id="cart">
-    <!-- <div class="container"> -->
       <div v-if="cart" class="p-4 m-3">
         <div class="row mx-auto">
-          <button class="btn btn-warning" @click="removeAll">Remove all</button>
+          <button class="btn btn-warning" @click="removeAll"><span> Remove all</span></button>
           <div class="col-md-9">
             <div v-for="item in cart" :key="item" :item="item" class="card m-3 p-3"
               style="width: 18rem; height: fit-content">
               <h2>{{ item.prodname }}</h2>
               <img :src="item.prodimg" alt="" />
               <h2>{{ item.prodid }}</h2>
-              <button class="btn btn-warning" @click="$store.dispatch('removeOne', item.prodid)">Delete</button>
+              <button class="btn btn-warning" @click="$store.dispatch('removeOne', item.prodid)"><span> Delete</span></button>
             </div>
           </div>
           <div class="vr"></div>
@@ -88,5 +87,11 @@ img{
 #total {
   border-top: solid 1px black;
   border-bottom: solid 1px black;
+}
+
+@media (max-width: 300px){
+  .card{
+
+  }
 }
 </style>

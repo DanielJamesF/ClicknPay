@@ -40,7 +40,7 @@
         placeholder="Leave a message &#128512;"
       ></textarea>
       <br />
-      <button type="button" class="btn btn-primary">Submit</button>
+      <button type="button"><span> Submit</span></button>
     </form>
   </div>
 </template>

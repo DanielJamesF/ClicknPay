@@ -24,7 +24,7 @@
             v-model="password"
           />
         </div>
-        <button type="submit" class="btn btn-dark">Submit</button>
+        <button type="submit"><span> Submit</span></button>
       </form>
       <router-link :to="{ name: 'register' }">
         <a style="font-size: 30px" class="nav-link"> Register</a>

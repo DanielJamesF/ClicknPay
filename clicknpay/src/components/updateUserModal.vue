@@ -4,7 +4,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Update User {{user.id}}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span></span></button>
         </div>
         <div class="modal-body">
           <div class="row">
@@ -64,11 +64,11 @@
             <!-- </div> -->
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-              Close
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><span>
+              Close</span>
             </button>
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="update">
-              Update
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="update"><span>
+              Update</span>
             </button>
           </div>
         </div>
