@@ -124,28 +124,11 @@ img {
   height: 5em;
   padding: 2px;
 }
-/* .container-fluid {
-  position: fixed;
-  width: 100%;
-  height: 90px;
-  border-bottom: 3px solid blue;
-  background-color: #fff;
-  display: flex;
-  justify-content: space-between;
-  z-index: 100;
-}
-
-
-nav {
-  right: 0;
-  z-index: 100;
-}
 
 nav a {
   font-size: 17px;
   color: black;
   text-decoration: none;
-  padding: 10px;
 }
 
 nav a.router-link-exact-active {
@@ -155,13 +138,4 @@ nav a.router-link-exact-active {
 nav a:hover {
   color: lightslategrey;
 }
-
-span{
-  padding: 5px;
-}
-@media (max-width: 992px) {
-  #div {
-    display: none;
-  }
-} */
 </style>

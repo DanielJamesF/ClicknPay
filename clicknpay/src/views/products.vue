@@ -41,7 +41,7 @@
             v-for="product in products"
             :key="product"
             class="card p-3 m-auto"
-            style="width: 18rem; height: 450px"
+            style="width: 18rem; height: fit-content"
           >
             <div class="my-auto">
               <router-link
@@ -139,6 +139,5 @@ export default {
 .card-img-top {
   /* border: solid; */
   aspect-ratio: 1;
-  height: 300px;
 }
 </style>
