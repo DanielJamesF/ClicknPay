@@ -9,7 +9,8 @@
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Product Name</th>
-              <th scope="col">Product Quantity</th>
+              <th scope="col">Product Price</th>
+              <th scope="col">Product Stock</th>
               <th scope="col">User ID</th>
               <th scope="col">
                 <a data-bs-toggle="modal" data-bs-target="#addnew" class="btn">
@@ -21,7 +22,8 @@
           <tr v-for="product in products" :key="product">
             <td>{{ product.id }}</td>
             <td>{{ product.prodname }}</td>
-            <td>{{ product.quantity }}</td>
+            <td>R{{ product.price }}.00</td>
+            <td>{{ product.stock }}</td>
             <td>{{ product.userid }}</td>
 
             <!-- icons -->
@@ -57,7 +59,6 @@
   <div id="else" v-else class="text-center d-flex flex-column">
     <h1>
       Uhm... This is awkward, Only Admins are supposed to be here... but idk
-      <!-- <i class="fa-regular fa-face-thinking"></i> -->
       <i class="fa-regular fa-face-meh"></i>
       <i class="fa-regular fa-face-grin-beam-sweat"></i>
     </h1>

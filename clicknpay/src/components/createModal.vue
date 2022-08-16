@@ -46,17 +46,30 @@
                   placeholder="Add image url"
                 />
               </div>
+              
+              <!-- category -->
+              <div class="mb-3">
+                <label for="addImage" class="form-label">Product Category</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  name="addImage"
+                  id="addType"
+                  v-model="category"
+                  placeholder="Add Category"
+                />
+              </div>
 
               <!-- Quantity -->
               <div class="mb-3">
-                <label for="addQuantity" class="form-label">Quantity</label>
+                <label for="addQuantity" class="form-label">Stock</label>
                 <input
                   class="form-control"
                   type="number"
                   name="addQuantity"
                   id="addQuantity"
-                  v-model="quantity"
-                  placeholder="Quantity"
+                  v-model="stock"
+                  placeholder="Stock"
                 />
               </div>
 
@@ -104,7 +117,8 @@ export default {
     return {
       prodname: "",
       prodimg: "https://i.postimg.cc/QtgJDH83/default-product-image.png",
-      quantity: 1,
+      category: "",
+      stock: 1,
       price: "",
     };
   }, 
@@ -112,8 +126,9 @@ export default {
     add() {
       return this.$store.dispatch("addProduct", {
         prodname: this.prodname,
+        category: this.category,
         prodimg: this.prodimg,
-        quantity: this.quantity,
+        stock: this.stock,
         price: this.price,
       });
     },

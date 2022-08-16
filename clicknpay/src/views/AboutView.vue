@@ -28,7 +28,7 @@ export default {};
 
 <style scoped>
 .container-fluid {
-  height: 100vh;
+  min-height: 100vh;
 }
 /* p {
   height: 100%;

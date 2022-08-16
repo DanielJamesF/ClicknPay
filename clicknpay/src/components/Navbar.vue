@@ -6,13 +6,7 @@
     <div class="container-fluid">
       <div id="div" class="nav-item">
         <router-link :to="{ name: 'home' }">
-          <img class="img-fluid" id="go" src="../assets/go.png" alt="go" />
-          <span class="text-dark text-decoration-none">F</span>
-          <span><img id="I" src="../assets/ittsreallyani.png" alt="I" /></span>
-          <span class="text-dark">G</span>
-          <span class="text-dark">U</span>
-          <span class="text-dark">R</span>
-          <span class="text-dark">E</span>
+          <img id="go" class="img-fluid" src="https://i.postimg.cc/SR1CkbHM/figure1.png" alt="go" />
         </router-link>
       </div>
       <button
@@ -45,9 +39,7 @@
             <router-link to="/cart">
               <button class="btn rounded-pill">
                 <i class="fs-4 fa-solid fa-cart-shopping"><span>{{num}}</span></i>
-                <!-- <p class="text-black">{{num}}</p> -->
               </button>
-              <!-- <a class="nav-link">Cart</a> -->
             </router-link>
           </div>
 
@@ -64,7 +56,7 @@
             <button class="btn" @click="logout">Logout</button>
           </div>
 
-          <div v-else class="d-md-flex">
+          <div v-else class="d-md-flex mx-auto">
             <router-link to="/login">
               <a class="nav-link">Login</a>
             </router-link>
@@ -127,7 +119,7 @@ img {
 #div span{
   padding: 3px;
 }
-@media (max-width: 365px) {
+@media (max-width: 403px) {
   #go{
     height: 20px;
   }
